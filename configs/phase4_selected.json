@@ -1,0 +1,9 @@
+{
+  "pipeline": "phase4",
+  "variant": "control_adaptive",
+  "model_sha256": "0bb7d30ec081391d10c6a87995e12e52b23ace849850571c77b7c86624bb449f",
+  "switch_penalty": 5,
+  "dead_penalty": 40,
+  "boundary_reduction": 0.75,
+  "feature_version": 1
+}

@@ -315,3 +315,34 @@ holdouts sealed. Tag fusion remains an optional, separately stress-tested prior.
 
 No competition inference, target-label tuning or target-video comparison occurred.
 Phase 4 requires a new user instruction after the Phase 3 GitHub update and stop.
+
+### Phase 4 results and Phase 5 direction
+
+Phase 4 is complete. An external training-only event audit found control-supporting
+annotations inside 63/600 spells shorter than two seconds and 626/685 spells at least
+five seconds long. Timestamp uncertainty and incomplete logging prevent equating
+uncorroborated spells with lack of control. Original labels were preserved. Capped
+partial inverse-duration weights and a geometry-based control/adaptive-boundary model
+were compared against frame weighting in four leave-one-training-match-out folds.
+
+The selected control/adaptive bundle improved mean original-scene CV spellF1 from
+0.4710 to 0.5153, with gains in all four folds and a better structured-noise score.
+Only after selection was it refit and checked on the development match. Mean spellF1
+rose from the frozen Phase 3 result of 0.4926 to 0.5373; clean/moderate/severe scores
+are 0.6024/0.5600/0.4495. Structured-noise spellF1 rose from 0.4283 to 0.4498.
+All 56 tests and independent checkpoint probability/label-byte/metric replay passed.
+These remain external provider-label validation results, not competition estimates.
+
+Short-spell recall improved but remains low: 16.9% clean and 5.6% severe at IoU 0.5.
+Long-spell recall under structured noise fell from 91.9% to 85.5%, a material tradeoff.
+A posthoc training-label audit found only 14/600 short spells with no stride-five
+sample, so resolution alone is not the main explanation. Phase 5 should first test
+reliability-aware boundary gating and then an optional player-motion temporal model.
+Keep Phase 4 as the new comparator and Phase 3 as a fallback; do not adopt a larger
+model without match-separated evidence. Any pretrained model must exclude reserved
+holdout matches from its training provenance or be retrained within our split.
+
+Soft duration terms and tag fusion were deferred: more persistence needs a short-spell
+guard, and no external source here reproduces Metrica's automatic tags. Synthetic
+phase priors alone would not establish their reliability. No competition inference
+or final-holdout evaluation occurred. Phase 5 requires the user's next instruction.

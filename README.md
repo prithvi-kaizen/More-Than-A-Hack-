@@ -1,8 +1,8 @@
 # More Than a Hack: possession inference
 
 Local implementation for the Metrica Sports More Than a Hack 2027 possession challenge.
-Phase 3 includes a trained external-data baseline with separate alive/dead and
-ownership models plus temporal decoding. Competition inference remains a later phase.
+Phase 4 adds control evidence and adaptive turnover boundaries to the trained
+external-data baseline. Competition inference remains a later phase.
 
 ## Setup and verification
 
@@ -23,10 +23,11 @@ licensed downloads, label masks and reproducible corruption checks implemented i
 The [Phase 3 model](docs/PHASE3_MODEL.md) documents the first trained control/dead-ball
 emissions, temporal decoder and external development-selection procedure.
 
-Mean external development spellF1 is 0.4926 across three input scenarios, compared
-with 0.2379 for the official smooth50 baseline. These selection-set results use
-IDSSE provider labels and do not estimate a competition score. Brief possessions
-remain the main weakness. See the method document for full results and limitations.
+Mean external development spellF1 is 0.5373 across three input scenarios, compared
+with 0.4926 for Phase 3 and 0.2379 for official smooth50. These selection-set results
+use IDSSE provider labels and do not estimate a competition score. Brief possessions
+and unreliable geometry remain limitations. See the [Phase 4 method](docs/PHASE4_MODEL.md)
+for cross-validation results, robustness tradeoffs and reproduction commands.
 
 Place the separately licensed competition bundle in `data/tactical/` and
 `data/broadcast/`, retaining the organizer filenames. To check local inputs:

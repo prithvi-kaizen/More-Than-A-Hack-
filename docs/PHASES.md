@@ -122,17 +122,41 @@ Main finding: temporal decoding suppresses fragmentation, but brief ownership sp
 are often lost. Below-two-second recall at IoU 0.5 is only 7.3% clean and 0% severe;
 above-15-second recall exceeds 93%. More fixed smoothing is not the next priority.
 
-## Phase 4 — pending user instruction
+## Phase 4 — control evidence and adaptive boundaries (complete)
 
-1. Audit external short-spell semantics against external event evidence. Preserve
-   the original provider-label benchmark and avoid chasing transient touches that
-   may not meet the competition's controlled-possession definition.
-2. Test capped segment-balanced ownership weights and learned/data-dependent boundary
-   evidence; use soft duration terms only where they preserve genuine brief spells.
-3. Add structured missingness/false-observation stress tests and assess carefully
-   limited tag priors. Do not assume synthetic phase tags reproduce Metrica tagging.
-4. Keep Phase 3 frozen as the comparator. Prefer cross-validation among training
-   matches for further variant selection; retain the final holdouts for later audit.
+* Audited external training-game short spells against timestamp-aligned event evidence;
+  preserved all original labels and recorded uncertainty in the control definition.
+* Tested frame weighting, capped inverse-duration weighting, and a control/adaptive
+  boundary model in four whole-match training folds. No fold model saw its held-out match.
+* Added geometry-only crowd/camera occlusion, duplicate tracks and false ball detections.
+* Selected `control_adaptive` before the development comparison. It improved primary
+  spellF1 in all four folds, from 0.4710 mean for the frame baseline to 0.5153.
+* Verified 56 tests, frozen Phase 3 replay and byte-identical development labels from
+  two independent Phase 4 checkpoint loads. Final holdouts remain sealed.
+
+| Development spellF1 | Clean | Moderate | Severe | Mean, original scenes |
+|---|---:|---:|---:|---:|
+| Frozen Phase 3 | 0.5260 | 0.5139 | 0.4378 | 0.4926 |
+| Phase 4 | 0.6024 | 0.5600 | 0.4495 | 0.5373 |
+
+Structured-noise spellF1 improves from 0.4283 to 0.4498. Clean short-spell recall
+improves from 7.3% to 16.9%, but remains weak; long-spell recall under structured
+noise falls from 91.9% to 85.5%. These external selection-set results do not establish
+a competition score. See [method](PHASE4_MODEL.md) and [aggregates](phase4_results.json).
+
+The semantic audit found control-supporting event overlap inside 63 of 600 brief
+training spells and 626 of 685 long spells. Event timing/completeness limits the
+interpretation, so no labels were removed. Only 14 short spells had no stride-five
+training sample; changing sampling resolution alone is unlikely to fix the weakness.
+
+## Phase 5 — pending user instruction
+
+Test reliability-aware turnover gating and an optional player-motion temporal branch
+against the frozen Phase 4 model. Preserve match-separated selection and explicit
+noise stress tests. Retain extra model complexity only if it improves external
+performance without an unacceptable robustness tradeoff. Audit pretrained training
+matches before using any published weights; reserved holdouts must stay unseen.
+Tag fusion/duration changes need their own validated evidence and short-spell guard.
 
 Each phase ends with checks, plan updates and a GitHub push, followed by a stop.
 The next phase begins only when the user asks to continue.

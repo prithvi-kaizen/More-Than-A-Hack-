@@ -2,7 +2,8 @@
 import numpy as np
 
 
-def decode(probabilities, switch_penalty=4.0, dead_penalty=None):
+def decode(probabilities, switch_penalty=4.0, dead_penalty=None,
+           boundary_scores=None, boundary_reduction=0.75):
     probabilities = np.asarray(probabilities, dtype=np.float64)
     if probabilities.ndim != 2 or probabilities.shape[1] != 3 or not np.isfinite(probabilities).all():
         raise ValueError('INVALID_STATE_PROBABILITIES')
@@ -13,6 +14,13 @@ def decode(probabilities, switch_penalty=4.0, dead_penalty=None):
         raise ValueError('INVALID_TRANSITION_PENALTY')
     if not len(probabilities):
         return np.array([], dtype='<U1')
+    if not 0 <= boundary_reduction <= 1:
+        raise ValueError('INVALID_BOUNDARY_REDUCTION')
+    if boundary_scores is not None:
+        boundary_scores = np.asarray(boundary_scores)
+        if boundary_scores.shape != (len(probabilities),) or not np.isfinite(boundary_scores).all() or (
+                (boundary_scores < 0).any() or (boundary_scores > 1).any()):
+            raise ValueError('INVALID_BOUNDARY_SCORES')
     p = probabilities/probabilities.sum(axis=1, keepdims=True)
     emission = np.log(np.clip(p, 1e-6, 1))
     transition = np.full((3, 3), -float(switch_penalty))
@@ -23,6 +31,9 @@ def decode(probabilities, switch_penalty=4.0, dead_penalty=None):
     scores = emission[0].copy()
     for t in range(1, len(p)):
         candidates = scores[:, None]+transition
+        if boundary_scores is not None:
+            turnover = switch_penalty*(1-boundary_reduction*boundary_scores[t])
+            candidates[0, 1], candidates[1, 0] = scores[0]-turnover, scores[1]-turnover
         back[t] = candidates.argmax(axis=0)
         scores = candidates[back[t], np.arange(3)]+emission[t]
         scores -= scores.max()

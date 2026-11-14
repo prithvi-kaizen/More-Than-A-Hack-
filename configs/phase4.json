@@ -1,0 +1,15 @@
+{
+  "seed": 2026,
+  "training_stride": 5,
+  "max_iter": 120,
+  "variants": ["frame", "balanced", "control_adaptive"],
+  "scenarios": ["clean", "moderate", "severe", "structured"],
+  "primary_scenarios": ["clean", "moderate", "severe"],
+  "switch_penalty": 5,
+  "dead_penalty": 40,
+  "boundary_reduction": 0.75,
+  "boundary_window_frames": 5,
+  "boundary_positive_weight": 20,
+  "structured_regression_tolerance": 0.02,
+  "selection": "four_leave_one_training_match_out_folds_then_one_development_comparison"
+}
