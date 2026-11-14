@@ -1,0 +1,13 @@
+# Competition inputs and local derived artifacts
+/data/
+/outputs/
+/local_reports/
+/external_data/
+*.zip
+*.mp4
+.DS_Store
+__pycache__/
+.venv/
+
+# Guard against accidentally staging inputs outside the data folder
+BAR-ATH_*

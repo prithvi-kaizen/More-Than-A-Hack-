@@ -1,0 +1,42 @@
+{
+  "repository": "https://github.com/metrica-sports/more-than-a-hack-2027",
+  "commit": "f8f2629ff1e0985f81d7e59d8413678514ee1530",
+  "files": [
+    {
+      "path": "LICENSE",
+      "blob": "d9330daa5cb9bd8c01412b938e5c15539cb5d799"
+    },
+    {
+      "path": "games.py",
+      "blob": "d330dc11b3c54d9c704f0c9df7de111395f9f1d4"
+    },
+    {
+      "path": "evaluation/possession_metrics.py",
+      "blob": "767494a053628cbdc81a8e9deaf43ef21cc7e58a"
+    },
+    {
+      "path": "evaluation/run_evaluation.py",
+      "blob": "16adc82b66ec15c7d4bb1ca86a72eceb7327d45f"
+    },
+    {
+      "path": "evaluation/validate_submission.py",
+      "blob": "9b25e3fc9f4973f5b58f1d58fd19ef80d34b206b"
+    },
+    {
+      "path": "starter/baseline.py",
+      "blob": "32369d601823dd4806433ba296786f1e7988cd31"
+    },
+    {
+      "path": "starter/load_atd.py",
+      "blob": "e002e6a85add76c9c8d4610c6ecfb0f43c55fa6b"
+    },
+    {
+      "path": "starter/load_smart_tagging.py",
+      "blob": "371148cde187a072d9b76a114815502ce7fcd83d"
+    },
+    {
+      "path": "starter/load_homography.py",
+      "blob": "e53314c177bb0a6b72e52ad49b89c46011dcb6fa"
+    }
+  ]
+}
