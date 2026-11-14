@@ -1,0 +1,43 @@
+{
+  "pipeline": "phase4_motion_fusion",
+  "policy": "motion_fusion",
+  "base": {
+    "config": "configs/phase4_selected.json",
+    "config_sha256": "74afea6aeccfb19c6550d3956e30e933285cf9353b0edaef0a2a5aa23eb7bd4f",
+    "checkpoint": "outputs/phase4/model.pkl",
+    "sha256": "0bb7d30ec081391d10c6a87995e12e52b23ace849850571c77b7c86624bb449f"
+  },
+  "temporal": {
+    "checkpoint": "outputs/phase5/motion.pt",
+    "sha256": "171be8c187be9417eb609c54516b8849c6da7ce6716e44eabc46fabf02d62c12",
+    "input_dim": 108,
+    "channels": 32,
+    "sample_stride": 5,
+    "inference_chunk": 512,
+    "frame_rate": 25,
+    "training_matches": [
+      "J03WMX",
+      "J03WN1",
+      "J03WOH",
+      "J03WOY"
+    ]
+  },
+  "fusion": {
+    "motion_max_weight": 0.35,
+    "missing_geometry_logit_scale": 0.5
+  },
+  "source_hashes": {
+    "scripts/run_phase4.py": "533ec3f1ffb208fc6c0b40df10608c6065fad645640f3727652f6634b6dcb3a5",
+    "src/mtah/decoder.py": "96766d346d355c8fc3d283dad5e0f70fe269be3c328f09404e2e715fd4afc5c0",
+    "src/mtah/phase4.py": "c273115d84feed48b4f79d8fa872ee091c55d437c20ac9c6017e759686f273be",
+    "src/mtah/structured_noise.py": "1e827f6bbba84315f94b7bbc1f37f0576a3893572bf495e4621c1b37203b4ede",
+    "scripts/run_phase5.py": "3c9fe48521b4da7af318eb138b30442cc541234006e3a958e1edc106a327d2c5",
+    "src/mtah/motion.py": "eb4d86b7e3989b7e18f128c3c64c289459bf36961568f8c1364f54adfaee654d",
+    "src/mtah/temporal.py": "7847e163cabab669e5c7228eb7163022d4238c01ab3950dc7b893779263cb34e",
+    "src/mtah/features.py": "82be3b5b5eb26b07f9bdb872f4990a0aaeaa0c804a9adb76ebc52133daa482c8",
+    "src/mtah/model.py": "1e73e0fee106480534e88977aeb435a2b3dd0a79b681eae27960af62557a4b7d"
+  },
+  "dependency_lock_sha256": "63da3097cf50a59e60d86904796656d395e0d43d047821e121f775da349e314e",
+  "selection_status": "development_selected_final_holdouts_unseen",
+  "competition_inference": false
+}

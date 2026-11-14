@@ -8,6 +8,6 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           version: '0.9.9'
-      - run: uv sync --frozen
-      - run: uv run --frozen python -m unittest discover -s tests -v
+      - run: uv sync --frozen --extra temporal
+      - run: uv run --frozen --extra temporal python -m unittest discover -s tests -v
       - run: uv run --frozen python scripts/check_staged_files.py

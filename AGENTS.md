@@ -13,3 +13,5 @@ matches. Never select a model using the competition public labels or target vide
 
 Run `uv run --frozen python -m unittest discover -s tests -v` and
 `uv run --frozen python scripts/check_staged_files.py` before each phase push.
+For temporal-model changes, also run the full suite with
+`uv run --frozen --extra temporal python -m unittest discover -s tests -v`.

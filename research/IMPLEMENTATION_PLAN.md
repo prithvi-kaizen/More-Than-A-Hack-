@@ -346,3 +346,67 @@ Soft duration terms and tag fusion were deferred: more persistence needs a short
 guard, and no external source here reproduces Metrica's automatic tags. Synthetic
 phase priors alone would not establish their reliability. No competition inference
 or final-holdout evaluation occurred. Phase 5 requires the user's next instruction.
+
+### Phase 5 results and selection
+
+The four-policy comparison selected a small player-motion temporal expert with
+reliability-weighted fusion. It was trained from scratch inside each training fold;
+no published weights or reserved holdout matches entered fitting. A fixed symmetric
+19,169-parameter TCN uses pooled player geometry/movement, masks dead/unknown ownership
+and runs eight epochs. Its ownership contribution is capped at 0.35 and increases
+only as ball-geometry reliability falls. The Phase 4 alive/dead emissions and decoder
+settings are retained. Reliability-only changes did not meet the 0.005 gain requirement.
+
+Mean original-scene CV spellF1 rises from 0.5153 to 0.5436, with all four folds won.
+Structured-noise spellF1 rises from 0.3979 to 0.4694 and long-spell recall from 79.2%
+to 83.3%. The selected policy was then refitted on all four training matches and
+compared once on development. Mean development spellF1 improves from 0.5373 to
+0.5581; clean/moderate/severe scores are 0.6058/0.5704/0.4982. Structured spellF1
+improves from 0.4498 to 0.5111 while long-spell recall remains 85.5%, passing the
+declared guards. The selected system is Phase 4 plus motion fusion, identified in
+`configs/phase5_selected.json`. Full experiment details are in `docs/PHASE5_MODEL.md`.
+
+All 67 synthetic tests passed, including deterministic real optimization, team/slot
+symmetry, chunk halos, loss masks and leakage/adoption guards. Frozen Phase 4 fold
+and development scores replayed exactly. Short spells remain weak: clean recall is
+unchanged at 16.9%, while severe recall rises from 5.6% to 8.1%. Repeated development
+use and single-provider simulated corruptions limit the generalization claim. The
+final holdouts, target inference and target-video comparison remain untouched.
+
+Independent checkpoint reloads also exactly reproduced saved fold probabilities,
+decoded labels, every policy's fold metrics and the development comparison. The
+audit verified training-match metadata, raw/prepared/cache provenance and source/
+dependency hashes. Detailed probabilities and checkpoint files remain local.
+
+Phase 6 should now validate and freeze this selected system, rather than add another
+model family or tune toward the development game. Report the final holdout results
+honestly, retain the recorded baselines, and proceed with automatic local inference
+checks. The next phase needs a new user instruction after the Phase 5 GitHub update.
+
+### Phase 6 execution requirements
+
+Phase 6 starts only after the Phase 5 report, checks and GitHub update, and a new
+user instruction. Freeze the Phase 5 selected configuration, checkpoint hashes,
+feature/decoder source hashes and dependency lock before opening final-holdout
+performance. Retain the Phase 4 and Phase 3 checkpoints as recorded comparators.
+
+Acquire and publisher-verify J03WQQ/J03WR9 tracking locally, with lossless raw-file
+compression if needed for disk space. Keep their inputs and provider labels separate.
+Evaluate the frozen system on clean/moderate/severe/structured conditions with the
+official scorer and short/long-spell diagnostics. Report these independent results
+without changing thresholds, model weights, fusion settings or epochs in response.
+Any implementation defect that invalidates an evaluation must be fixed and documented
+as such, rather than treated as an opportunity for further model selection.
+
+Then implement the local tactical-feed inference adapter. Validate coordinate units,
+team membership, frame rate and half windows using metadata and automatic structural
+checks. Match the trained feature/time conventions and reset temporal state between
+halves. Verify selected checkpoint/source hashes before inference. Generate the
+full organizer-format CSV locally, enforce the required row count and label alphabet,
+and run the pinned official validator. Repeat inference from independent checkpoint
+loads and require identical CSV bytes. No target output, public possession labels or
+video comparison may guide model changes. Detailed predictions remain local.
+
+Do not add tag fusion, duration constraints or camera fusion during final inference:
+none has the required external validation. Publish source code, external aggregate
+results and the revised phase record; stop again before Phase 7 packaging/submission.

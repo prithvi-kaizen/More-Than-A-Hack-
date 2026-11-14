@@ -1,21 +1,23 @@
 # More Than a Hack: possession inference
 
 Local implementation for the Metrica Sports More Than a Hack 2027 possession challenge.
-Phase 4 adds control evidence and adaptive turnover boundaries to the trained
-external-data baseline. Competition inference remains a later phase.
+Phase 5 adds a player-motion temporal expert and reliability-weighted fusion to the
+control/adaptive-boundary model. Competition inference remains a later phase.
 
 ## Setup and verification
 
 Install [uv](https://docs.astral.sh/uv/) and run:
 
 ```sh
-uv sync --frozen
-uv run --frozen python -m unittest discover -s tests -v
+uv sync --frozen --extra temporal
+uv run --frozen --extra temporal python -m unittest discover -s tests -v
 ```
 
 Python 3.12 is required. `uv.lock` pins all dependencies. Tests use synthetic data and
 do not require competition inputs, public labels or a network connection after setup.
 CI runs the same synthetic checks on Linux.
+The temporal extra installs PyTorch; the earlier tree-only system can use the core
+environment without that extra.
 
 The [external-data contract](docs/EXTERNAL_DATA.md) documents the frozen match splits,
 licensed downloads, label masks and reproducible corruption checks implemented in Phase 2.
@@ -23,11 +25,14 @@ licensed downloads, label masks and reproducible corruption checks implemented i
 The [Phase 3 model](docs/PHASE3_MODEL.md) documents the first trained control/dead-ball
 emissions, temporal decoder and external development-selection procedure.
 
-Mean external development spellF1 is 0.5373 across three input scenarios, compared
-with 0.4926 for Phase 3 and 0.2379 for official smooth50. These selection-set results
-use IDSSE provider labels and do not estimate a competition score. Brief possessions
-and unreliable geometry remain limitations. See the [Phase 4 method](docs/PHASE4_MODEL.md)
-for cross-validation results, robustness tradeoffs and reproduction commands.
+Mean external development spellF1 is 0.5581 across three input scenarios, compared
+with 0.5373 for Phase 4, 0.4926 for Phase 3 and 0.2379 for official smooth50. These
+selection-set results use IDSSE provider labels and do not estimate a competition score. Brief possessions
+and unreliable geometry remain limitations. See the [Phase 5 method](docs/PHASE5_MODEL.md)
+for the four-match comparison, robustness guards and reproduction commands. Motion
+fusion improved every training-match fold; final holdouts remain unseen. The
+[selected manifest](configs/phase5_selected.json) identifies the local checkpoints
+and source hashes required for the next phase.
 
 Place the separately licensed competition bundle in `data/tactical/` and
 `data/broadcast/`, retaining the organizer filenames. To check local inputs:

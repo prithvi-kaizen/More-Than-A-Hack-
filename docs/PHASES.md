@@ -149,14 +149,45 @@ training spells and 626 of 685 long spells. Event timing/completeness limits the
 interpretation, so no labels were removed. Only 14 short spells had no stride-five
 training sample; changing sampling resolution alone is unlikely to fix the weakness.
 
-## Phase 5 — pending user instruction
+## Phase 5 — reliability and player-motion fusion (complete)
 
-Test reliability-aware turnover gating and an optional player-motion temporal branch
-against the frozen Phase 4 model. Preserve match-separated selection and explicit
-noise stress tests. Retain extra model complexity only if it improves external
-performance without an unacceptable robustness tradeoff. Audit pretrained training
-matches before using any published weights; reserved holdouts must stay unseen.
-Tag fusion/duration changes need their own validated evidence and short-spell guard.
+* Added geometry reliability, conditional-logit tempering and conservative motion fusion.
+* Trained a 19,169-parameter, team-symmetric temporal network from scratch on player
+  movement only. PyTorch is optional, with CPU wheels configured for Linux CI.
+* Compared four fixed policies in four whole-match folds. Each fold refitted the tree
+  and neural models without its evaluation match; frozen Phase 4 scores replayed exactly.
+* Selected motion fusion before development: mean CV spellF1 rises from 0.5153 to
+  0.5436, with wins in all four folds. Structured-noise spellF1 rises from 0.3979
+  to 0.4694, and pooled long-spell recall rises from 79.2% to 83.3%.
+* Reliability-only variants did not meet the declared gain requirement. Model settings,
+  eight training epochs and adoption thresholds were fixed before these comparisons.
+
+| Development spellF1 | Clean | Moderate | Severe | Mean, original scenes |
+|---|---:|---:|---:|---:|
+| Frozen Phase 4 | 0.6024 | 0.5600 | 0.4495 | 0.5373 |
+| Selected motion fusion | 0.6058 | 0.5704 | 0.4982 | 0.5581 |
+
+Structured development spellF1 rises from 0.4498 to 0.5111; long-spell recall stays
+at 85.5%. Severe short-spell recall improves from 5.6% to 8.1%, while clean recall
+stays at 16.9%. Brief possessions and provider-to-competition transfer remain concerns.
+The development match has been reused across phases and is not an independent test.
+
+All 67 synthetic tests passed. Reloaded checkpoints exactly replayed out-of-fold
+probabilities, decoded labels, all policy metrics and the development comparison.
+Training-match metadata, cache/source hashes and dependency integrity were checked.
+The selected checkpoint/source manifest, experiment settings and external aggregates
+are public; detailed arrays and model weights stay
+local. See [method](PHASE5_MODEL.md), [results](phase5_results.json) and
+[selection manifest](../configs/phase5_selected.json). No final holdout or competition
+inference was run.
+
+## Phase 6 — pending user instruction
+
+Freeze selected artifacts before evaluating the two final external holdouts. Preserve
+their role as independent tests rather than another tuning set. Implement local tactical
+inference, validate the organizer CSV and require byte-identical reproduction from
+independent checkpoint loads. Target-based tuning, video comparison and new unvalidated
+model components remain excluded. Packaging/submission belongs to Phase 7.
 
 Each phase ends with checks, plan updates and a GitHub push, followed by a stop.
 The next phase begins only when the user asks to continue.

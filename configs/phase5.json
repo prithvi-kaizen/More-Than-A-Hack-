@@ -1,0 +1,24 @@
+{
+  "seed": 2026,
+  "variants": ["phase4", "reliable_boundary", "reliable_tempered", "motion_fusion"],
+  "primary_scenarios": ["clean", "moderate", "severe"],
+  "scenarios": ["clean", "moderate", "severe", "structured"],
+  "minimum_cv_gain": 0.005,
+  "minimum_winning_folds": 3,
+  "structured_regression_tolerance": 0.01,
+  "structured_long_recall_tolerance": 0.01,
+  "motion_max_weight": 0.35,
+  "missing_geometry_logit_scale": 0.5,
+  "neural": {
+    "epochs": 8,
+    "channels": 32,
+    "window": 64,
+    "window_stride": 32,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.001,
+    "sample_stride": 5,
+    "inference_chunk": 512
+  },
+  "selection": "four_training_match_folds_before_one_development_comparison"
+}
