@@ -283,3 +283,35 @@ On continuation, finish and verify the remaining selected training/development t
 Pilot verification: J03WMX full tracking passed the original publisher checksum. Both halves prepared successfully, with 145,967 total frames and complete provider status/ownership labels. The untrained nearest-player comparator gives spellF1 0.1043 clean, 0.0550 moderate corruption and 0.0111 severe corruption; macroF1 rises from 0.3826 clean to 0.4289/0.4142 because some false dead-ball guesses happen to be correct. These external training-pilot diagnostics justify keeping spellF1 as the selection objective and prioritizing alive/dead inference and temporal coherence. They do not establish competition accuracy or justify choosing a hyperparameter. Six full tracking files remain to acquire in Phase 3; no acquisition continues after this phase stop.
 
 Supplemental archive check after Phase 2: six additional Drive ZIPs contained only SHA-256-verified copies of the seven canonical assets. Redundant ZIPs were removed after re-verification. No videos or new inputs were added, so the asset inventory and Phase 3 prerequisites are unchanged. This check did not begin Phase 3.
+
+### Phase 3 results and revised priorities
+
+Phase 3 is complete: all four training matches and the development match are now
+verified/prepared. The remaining two holdout tracking files are deferred; they are
+not required for development fitting. Disk constraints were handled with lossless
+raw-XML compression and original-byte checksum verification. Native mirror transfers
+were adopted only after their publisher hashes matched. Acquisition/training locks
+prevent overlapping retries. Detailed source provenance and the model binary stay local.
+
+The first model uses 42 alive/dead and 15 ownership features, separate histogram
+boosted classifiers and exact H/A/D Viterbi decoding. It trained on 340,374 sampled
+external examples across three corruption scenarios. Selected turnover/dead penalties
+are 5/40. Mean development spellF1 is 0.4926 versus 0.2379 for official smooth50;
+clean/moderate/severe scores are 0.5260/0.5139/0.4378. Mean macroF1 is 0.8887.
+These are selection-set results on IDSSE provider labels, not a competition estimate.
+All 45 synthetic tests and full development replay passed. See `docs/PHASE3_MODEL.md`
+and `docs/phase3_results.json` for aggregates and limitations.
+
+The audit changes Phase 4 priorities. Alive/dead F1 is strong (0.9968 clean and
+0.9542 severe), whereas short ownership spells are frequently missed: below-two-second
+recall at IoU 0.5 is 7.3% clean and 0% severe, versus more than 93% for spells over
+15 seconds. First check whether those short provider spells represent controlled
+possessions using external event evidence. Preserve the original label benchmark
+rather than redefining it for a higher score. Then test capped inverse-duration
+sample weighting, boundary-sensitive ownership emissions and adaptive transitions;
+avoid simply increasing smoothing or imposing a minimum duration. Use four training
+matches for cross-validation of further architectural choices and keep the two final
+holdouts sealed. Tag fusion remains an optional, separately stress-tested prior.
+
+No competition inference, target-label tuning or target-video comparison occurred.
+Phase 4 requires a new user instruction after the Phase 3 GitHub update and stop.

@@ -7,16 +7,17 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
-from mtah.external import file_digest, load_idsse, manifest
+from mtah.external import file_digest, load_idsse, manifest, verify_raw
 
 
 def prepare(match_id, config):
     entries = {e['kind']: e for e in config['files'] if e['match_id'] == match_id}
     raw = ROOT / 'external_data/idsse/raw'
     paths = {kind: raw / entry['name'] for kind, entry in entries.items()}
+    paths = {k: p if p.exists() else p.with_suffix('.xml.gz') for k, p in paths.items()}
     for kind, path in paths.items():
         e = entries[kind]
-        if not path.is_file() or path.stat().st_size != e['size'] or file_digest(path, 'md5') != e['md5']:
+        if not path.is_file() or not verify_raw(path, e):
             raise ValueError('UNVERIFIED_EXTERNAL_INPUT')
     periods = load_idsse(paths['metadata'], paths['positions'], match_id)
     folder = ROOT / 'external_data/idsse/prepared' / match_id

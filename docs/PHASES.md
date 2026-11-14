@@ -89,17 +89,50 @@ archives after rechecking both archived and retained content. No new asset or vi
 was present. The detailed manifest remains in ignored local reports. This inventory
 check does not authorize or start Phase 3; the model plan is unchanged.
 
-## Phase 3 — pending user instruction
+## Phase 3 — trained baseline and temporal decoding (complete)
 
-Finish the remaining full external tracking transfers explicitly, verify and prepare
-training/development data, then implement the first control/dead-ball emissions and
-three-state decoder. All seven metadata/event pairs are already available. The pilot
-validates the external workflow; it does not replace development evaluation. Do not
-leave acquisition running after this phase or inspect holdout performance during tuning.
+* Acquired, publisher-verified and prepared all four training matches plus development.
+  Verified raw tracking was compressed losslessly to stay within available disk space.
+  The two final holdout tracking files remain deferred.
+* Implemented geometry-only control/movement features, separate boosted alive/dead
+  and ownership models, team symmetry, and exact three-state Viterbi decoding.
+* Fitted 340,374 sampled training examples, including clean/moderate/severe inputs.
+* Selected penalties on the development match from ten declared candidates. Compared
+  against raw nearest-player and the original official smooth50 implementation.
+* Added publisher-checked partial-range resume, acquisition/training locks, prepared
+  provenance enforcement, checkpoint replay and a class/short-spell audit.
 
-The initial corruption suite covers moderate/severe random interval loss, positional
-noise and same-team track fragments. Add crowd/boundary-dependent loss and false
-observations as further external ablations. Do not tune those mechanisms to target outputs.
+Verification: 45 synthetic tests passed; full pilot feature extraction passed; all
+five required matches passed raw/prepared integrity checks. The checkpoint replayed
+all development scores exactly. No holdout score or competition prediction was used.
+
+| External development spellF1 | Clean | Moderate | Severe | Mean |
+|---|---:|---:|---:|---:|
+| Official smooth50 | 0.3171 | 0.2707 | 0.1260 | 0.2379 |
+| Boosted argmax | 0.2680 | 0.1386 | 0.0476 | 0.1514 |
+| Boosted Viterbi | 0.5260 | 0.5139 | 0.4378 | 0.4926 |
+
+The selected pipeline is boosted Viterbi, with turnover/dead-transition penalties
+5/40. Mean macroF1 is 0.8887. The development match was used for selection; these
+are proxy-label validation results, not an independent test or competition score.
+Full aggregates and method details: [Phase 3 model](PHASE3_MODEL.md) and
+[results](phase3_results.json).
+
+Main finding: temporal decoding suppresses fragmentation, but brief ownership spells
+are often lost. Below-two-second recall at IoU 0.5 is only 7.3% clean and 0% severe;
+above-15-second recall exceeds 93%. More fixed smoothing is not the next priority.
+
+## Phase 4 — pending user instruction
+
+1. Audit external short-spell semantics against external event evidence. Preserve
+   the original provider-label benchmark and avoid chasing transient touches that
+   may not meet the competition's controlled-possession definition.
+2. Test capped segment-balanced ownership weights and learned/data-dependent boundary
+   evidence; use soft duration terms only where they preserve genuine brief spells.
+3. Add structured missingness/false-observation stress tests and assess carefully
+   limited tag priors. Do not assume synthetic phase tags reproduce Metrica tagging.
+4. Keep Phase 3 frozen as the comparator. Prefer cross-validation among training
+   matches for further variant selection; retain the final holdouts for later audit.
 
 Each phase ends with checks, plan updates and a GitHub push, followed by a stop.
 The next phase begins only when the user asks to continue.

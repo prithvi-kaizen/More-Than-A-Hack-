@@ -1,0 +1,8 @@
+{
+  "seed": 2026,
+  "training_stride": 5,
+  "max_iter": 120,
+  "scenarios": ["clean", "moderate", "severe"],
+  "transition_grid": [[0, 0], [5, 5], [15, 5], [40, 5], [5, 15], [15, 15], [40, 15], [5, 40], [15, 40], [40, 40]],
+  "selection_metric": "mean_spell_f1_across_development_scenarios"
+}

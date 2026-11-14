@@ -7,10 +7,12 @@ from pathlib import Path
 import subprocess
 import shutil
 import sys
+import re
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
-from mtah.external import manifest as read_manifest
+from mtah.external import manifest as read_manifest, verify_raw
 
 
 def checksum(path):
@@ -25,6 +27,9 @@ def download(entry, mirror=False, workers=8):
     folder = ROOT / 'external_data/idsse/raw'
     folder.mkdir(parents=True, exist_ok=True)
     target = folder / entry['name']
+    compressed = target.with_suffix('.xml.gz')
+    if compressed.exists() and verify_raw(compressed, entry):
+        return
     if target.exists() and target.stat().st_size == entry['size'] and checksum(target) == entry['md5']:
         return
     temporary = target.with_suffix('.xml.part')
@@ -35,17 +40,38 @@ def download(entry, mirror=False, workers=8):
         def part(start):
             stop = min(entry['size'], start + chunk_size) - 1
             path = parts / str(start)
-            if path.exists() and path.stat().st_size == stop-start+1:
-                return path
-            url = ('https://huggingface.co/datasets/pysport/idsse-data/resolve/'
-                   'a715a38/' + entry['name'] + '?download=true&part=' + str(start))
-            subprocess.run(['curl', '--http1.1', '--fail', '--location', '--silent', '--show-error',
-                            '--retry', '3', '--retry-all-errors', '--retry-delay', '1',
-                            '--range', f'{start}-{stop}', '--max-time', '180',
-                            url, '-o', str(path)], check=True)
-            if path.stat().st_size != stop-start+1:
-                raise ValueError('EXTERNAL_RANGE_MISMATCH')
-            return path
+            for attempt in range(8):
+                existing = path.stat().st_size if path.exists() else 0
+                if existing == stop-start+1:
+                    return path
+                if existing > stop-start+1:
+                    path.unlink()
+                    existing = 0
+                offset = start + existing
+                url = ('https://huggingface.co/datasets/pysport/idsse-data/resolve/'
+                       'a715a38/' + entry['name'] + '?download=true&part=' + str(start)
+                       + '&offset=' + str(offset))
+                tail, headers = parts / (str(start)+'.tail'), parts / (str(start)+'.headers')
+                tail.write_bytes(b'')
+                subprocess.run(['curl', '--http1.1', '--fail', '--location', '--silent', '--show-error',
+                                '--speed-limit', '4096', '--speed-time', '20',
+                                '--range', f'{offset}-{stop}', '--max-time', '90',
+                                url, '-D', str(headers), '-o', str(tail)], check=False)
+                ranges = re.findall(r'content-range:\s*bytes\s+(\d+)-(\d+)/(\d+)',
+                                    headers.read_text(errors='replace') if headers.exists() else '', re.I)
+                # Even a truncated response can supply a valid prefix; retain it only
+                # when the server explicitly confirms the requested byte interval.
+                if ranges and tuple(map(int, ranges[-1])) == (offset, stop, entry['size']):
+                    size = tail.stat().st_size
+                    if 0 < size <= stop-offset+1:
+                        with path.open('ab') as output, tail.open('rb') as source:
+                            shutil.copyfileobj(source, output)
+                tail.unlink(missing_ok=True)
+                headers.unlink(missing_ok=True)
+                if path.exists() and path.stat().st_size == stop-start+1:
+                    return path
+                time.sleep(1)
+            raise ValueError('EXTERNAL_RANGE_TRANSFER_INCOMPLETE')
         with ThreadPoolExecutor(max_workers=workers) as pool:
             paths = list(pool.map(part, range(0, entry['size'], chunk_size)))
         with temporary.open('wb') as stream:
@@ -53,6 +79,8 @@ def download(entry, mirror=False, workers=8):
                 with path.open('rb') as source:
                     shutil.copyfileobj(source, stream)
         if temporary.stat().st_size != entry['size'] or checksum(temporary) != entry['md5']:
+            temporary.unlink(missing_ok=True)
+            shutil.rmtree(parts)
             raise ValueError('EXTERNAL_CHECKSUM_MISMATCH')
         temporary.replace(target)
         shutil.rmtree(parts)

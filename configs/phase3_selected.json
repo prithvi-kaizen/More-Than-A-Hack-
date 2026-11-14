@@ -1,0 +1,5 @@
+{
+  "switch_penalty": 5,
+  "dead_penalty": 40,
+  "pipeline": "boosted_viterbi"
+}

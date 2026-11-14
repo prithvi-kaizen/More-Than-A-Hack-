@@ -1,6 +1,7 @@
 """External manifest guards and an IDSSE adapter; no target-data dependencies."""
 from dataclasses import dataclass
 import hashlib
+import gzip
 import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
@@ -81,10 +82,12 @@ def metadata(path, match_id):
 
 def framesets(path):
     """Bound memory to one object/period rather than a whole match XML tree."""
-    for _, element in ET.iterparse(path, events=('end',)):
-        if element.tag == 'FrameSet':
-            yield element
-            element.clear()
+    opener = gzip.open if str(path).endswith('.gz') else open
+    with opener(path, 'rb') as stream:
+        for _, element in ET.iterparse(stream, events=('end',)):
+            if element.tag == 'FrameSet':
+                yield element
+                element.clear()
 
 
 def load_idsse(meta_path, positions_path, match_id):
@@ -156,7 +159,18 @@ def load_idsse(meta_path, positions_path, match_id):
 
 def file_digest(path, algorithm='sha256'):
     h = hashlib.new(algorithm)
-    with Path(path).open('rb') as stream:
+    opener = gzip.open if str(path).endswith('.gz') else open
+    with opener(path, 'rb') as stream:
         for chunk in iter(lambda: stream.read(1024*1024), b''):
             h.update(chunk)
     return h.hexdigest()
+
+
+def verify_raw(path, entry):
+    h, size = hashlib.md5(), 0
+    opener = gzip.open if str(path).endswith('.gz') else open
+    with opener(path, 'rb') as stream:
+        for chunk in iter(lambda: stream.read(1024*1024), b''):
+            h.update(chunk)
+            size += len(chunk)
+    return size == entry['size'] and h.hexdigest() == entry['md5']
