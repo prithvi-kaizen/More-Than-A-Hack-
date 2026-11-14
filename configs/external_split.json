@@ -1,0 +1,192 @@
+{
+  "provider": "idsse",
+  "article": "https://doi.org/10.6084/m9.figshare.28196177",
+  "license": "CC-BY-4.0",
+  "credit": "Deutsche Fu\u00dfball Liga (DFL); Bassek et al. (2025), doi:10.1038/s41597-025-04505-y",
+  "fps": 25,
+  "split": {
+    "train": [
+      "J03WMX",
+      "J03WN1",
+      "J03WOH",
+      "J03WOY"
+    ],
+    "development": [
+      "J03WPY"
+    ],
+    "holdout": [
+      "J03WQQ",
+      "J03WR9"
+    ]
+  },
+  "files": [
+    {
+      "match_id": "J03WN1",
+      "kind": "metadata",
+      "name": "DFL_02_01_matchinformation_DFL-COM-000001_DFL-MAT-J03WN1.xml",
+      "url": "https://ndownloader.figshare.com/files/51643472",
+      "size": 11722,
+      "md5": "37b0f85588c0acfb995fe633c7ac2e0d"
+    },
+    {
+      "match_id": "J03WMX",
+      "kind": "metadata",
+      "name": "DFL_02_01_matchinformation_DFL-COM-000001_DFL-MAT-J03WMX.xml",
+      "url": "https://ndownloader.figshare.com/files/51643475",
+      "size": 11930,
+      "md5": "bc5d5b21dbcf36aa30f4cd0428309f6b"
+    },
+    {
+      "match_id": "J03WOH",
+      "kind": "metadata",
+      "name": "DFL_02_01_matchinformation_DFL-COM-000002_DFL-MAT-J03WOH.xml",
+      "url": "https://ndownloader.figshare.com/files/51643478",
+      "size": 11745,
+      "md5": "b9710781d400dd812f62b0a6e3d7bce8"
+    },
+    {
+      "match_id": "J03WR9",
+      "kind": "metadata",
+      "name": "DFL_02_01_matchinformation_DFL-COM-000002_DFL-MAT-J03WR9.xml",
+      "url": "https://ndownloader.figshare.com/files/51643490",
+      "size": 11823,
+      "md5": "5e2d580d3d8ed97e32959de90d04992b"
+    },
+    {
+      "match_id": "J03WPY",
+      "kind": "metadata",
+      "name": "DFL_02_01_matchinformation_DFL-COM-000002_DFL-MAT-J03WPY.xml",
+      "url": "https://ndownloader.figshare.com/files/51643487",
+      "size": 11922,
+      "md5": "65a4568e4f374af94d3c1015cbc7c4f5"
+    },
+    {
+      "match_id": "J03WQQ",
+      "kind": "metadata",
+      "name": "DFL_02_01_matchinformation_DFL-COM-000002_DFL-MAT-J03WQQ.xml",
+      "url": "https://ndownloader.figshare.com/files/51643484",
+      "size": 11932,
+      "md5": "5979209af316a914ce57347d0633df6c"
+    },
+    {
+      "match_id": "J03WOY",
+      "kind": "metadata",
+      "name": "DFL_02_01_matchinformation_DFL-COM-000002_DFL-MAT-J03WOY.xml",
+      "url": "https://ndownloader.figshare.com/files/51643481",
+      "size": 11952,
+      "md5": "7b021e577fca917a63111d55cc29ae5b"
+    },
+    {
+      "match_id": "J03WMX",
+      "kind": "events",
+      "name": "DFL_03_02_events_raw_DFL-COM-000001_DFL-MAT-J03WMX.xml",
+      "url": "https://ndownloader.figshare.com/files/51643493",
+      "size": 776578,
+      "md5": "2d88e180a1f63c7e4157feb980fc7255"
+    },
+    {
+      "match_id": "J03WN1",
+      "kind": "events",
+      "name": "DFL_03_02_events_raw_DFL-COM-000001_DFL-MAT-J03WN1.xml",
+      "url": "https://ndownloader.figshare.com/files/51643496",
+      "size": 612114,
+      "md5": "83e8ed7ea8e8ebbbdc61f61ac3534008"
+    },
+    {
+      "match_id": "J03WOH",
+      "kind": "events",
+      "name": "DFL_03_02_events_raw_DFL-COM-000002_DFL-MAT-J03WOH.xml",
+      "url": "https://ndownloader.figshare.com/files/51643499",
+      "size": 635747,
+      "md5": "ab66e51512f39d06f49f27dd3b4c2f40"
+    },
+    {
+      "match_id": "J03WOY",
+      "kind": "events",
+      "name": "DFL_03_02_events_raw_DFL-COM-000002_DFL-MAT-J03WOY.xml",
+      "url": "https://ndownloader.figshare.com/files/51643502",
+      "size": 683018,
+      "md5": "64b1be01d6ff6848168efebd56f344b9"
+    },
+    {
+      "match_id": "J03WPY",
+      "kind": "events",
+      "name": "DFL_03_02_events_raw_DFL-COM-000002_DFL-MAT-J03WPY.xml",
+      "url": "https://ndownloader.figshare.com/files/51643505",
+      "size": 698898,
+      "md5": "f68482441d38723d69f244f896482803"
+    },
+    {
+      "match_id": "J03WQQ",
+      "kind": "events",
+      "name": "DFL_03_02_events_raw_DFL-COM-000002_DFL-MAT-J03WQQ.xml",
+      "url": "https://ndownloader.figshare.com/files/51643508",
+      "size": 732186,
+      "md5": "b7e9d82af4034539d802319be6c57776"
+    },
+    {
+      "match_id": "J03WR9",
+      "kind": "events",
+      "name": "DFL_03_02_events_raw_DFL-COM-000002_DFL-MAT-J03WR9.xml",
+      "url": "https://ndownloader.figshare.com/files/51643511",
+      "size": 681050,
+      "md5": "c13bc5efa5eca4a022cc678210b87d5f"
+    },
+    {
+      "match_id": "J03WMX",
+      "kind": "positions",
+      "name": "DFL_04_03_positions_raw_observed_DFL-COM-000001_DFL-MAT-J03WMX.xml",
+      "url": "https://ndownloader.figshare.com/files/51643514",
+      "size": 418524833,
+      "md5": "e4273a2adf5dbd9d4ec42def2f01905c"
+    },
+    {
+      "match_id": "J03WN1",
+      "kind": "positions",
+      "name": "DFL_04_03_positions_raw_observed_DFL-COM-000001_DFL-MAT-J03WN1.xml",
+      "url": "https://ndownloader.figshare.com/files/51643517",
+      "size": 391722803,
+      "md5": "bacb2f609c1d1b0bfc906f6b9d4109f2"
+    },
+    {
+      "match_id": "J03WOH",
+      "kind": "positions",
+      "name": "DFL_04_03_positions_raw_observed_DFL-COM-000002_DFL-MAT-J03WOH.xml",
+      "url": "https://ndownloader.figshare.com/files/51643520",
+      "size": 348945715,
+      "md5": "3efff25a86a61768e7d253b4bba137a3"
+    },
+    {
+      "match_id": "J03WOY",
+      "kind": "positions",
+      "name": "DFL_04_03_positions_raw_observed_DFL-COM-000002_DFL-MAT-J03WOY.xml",
+      "url": "https://ndownloader.figshare.com/files/51643523",
+      "size": 362567859,
+      "md5": "4e1063e0a0ae499920cf68ac1aa3ab4e"
+    },
+    {
+      "match_id": "J03WPY",
+      "kind": "positions",
+      "name": "DFL_04_03_positions_raw_observed_DFL-COM-000002_DFL-MAT-J03WPY.xml",
+      "url": "https://ndownloader.figshare.com/files/51643526",
+      "size": 371688499,
+      "md5": "e56ff1336a334f8da51110fbe7cab764"
+    },
+    {
+      "match_id": "J03WQQ",
+      "kind": "positions",
+      "name": "DFL_04_03_positions_raw_observed_DFL-COM-000002_DFL-MAT-J03WQQ.xml",
+      "url": "https://ndownloader.figshare.com/files/51643529",
+      "size": 356219423,
+      "md5": "9105bad987191d3c3c362c1fce9a4fcd"
+    },
+    {
+      "match_id": "J03WR9",
+      "kind": "positions",
+      "name": "DFL_04_03_positions_raw_observed_DFL-COM-000002_DFL-MAT-J03WR9.xml",
+      "url": "https://ndownloader.figshare.com/files/51643532",
+      "size": 372934140,
+      "md5": "e060bb7d7a5a3bfbd15bbf9bc631024d"
+    }
+  ]
+}

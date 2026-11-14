@@ -17,6 +17,9 @@ Python 3.12 is required. `uv.lock` pins all dependencies. Tests use synthetic da
 do not require competition inputs, public labels or a network connection after setup.
 CI runs the same synthetic checks on Linux.
 
+The [external-data contract](docs/EXTERNAL_DATA.md) documents the frozen match splits,
+licensed downloads, label masks and reproducible corruption checks implemented in Phase 2.
+
 Place the separately licensed competition bundle in `data/tactical/` and
 `data/broadcast/`, retaining the organizer filenames. To check local inputs:
 

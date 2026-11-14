@@ -5,7 +5,7 @@ import subprocess
 
 def allowed(path, mode, size):
     p = PurePosixPath(path)
-    roots = {'src', 'tests', 'scripts', 'docs', 'research', 'vendor', '.github'}
+    roots = {'src', 'tests', 'scripts', 'docs', 'research', 'vendor', '.github', 'configs'}
     root_files = {'README.md', '.gitignore', '.python-version', 'pyproject.toml', 'uv.lock', 'AGENTS.md'}
     extensions = {'.py', '.md', '.json', '.yml', '.yaml', '.ipynb'}
     return (mode in {'100644', '100755'} and size <= 500_000
