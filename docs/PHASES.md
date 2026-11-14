@@ -81,6 +81,14 @@ No training, target inference, public target-label scoring or final-holdout perf
 inspection occurred. The pilot is a training match. Provider ownership remains a proxy
 for the competition control definition; the adapter does not establish their equivalence.
 
+## Supplemental archive review — complete
+
+Checked six newly supplied ZIPs locally after Phase 2. Their seven members were
+SHA-256-identical to the canonical tactical/broadcast assets. Removed the redundant
+archives after rechecking both archived and retained content. No new asset or video
+was present. The detailed manifest remains in ignored local reports. This inventory
+check does not authorize or start Phase 3; the model plan is unchanged.
+
 ## Phase 3 — pending user instruction
 
 Finish the remaining full external tracking transfers explicitly, verify and prepare
