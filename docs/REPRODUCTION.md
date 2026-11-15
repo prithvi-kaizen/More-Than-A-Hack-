@@ -56,6 +56,14 @@ Do not upload the manifest or local checkpoints as the possession file. Use the
 organizer's emailed form to upload the CSV/document and supply the public repository
 URL. The scripts do not submit that form.
 
+On current `main`, repackaging preserves any existing `UPLOAD_INSTRUCTIONS.md`
+byte for byte, including locally added form links, deadlines and registration notes.
+It refreshes the technical document and integrity manifest while preserving candidate
+CSV bytes. A different team name or an existing manifest marked submitted is rejected
+before package writes. Review those cases explicitly rather than overwriting an
+existing team's package. This hardening is newer than the `inference-v1` tooling
+snapshot; use current `main` for packaging and the pinned tag for inference replay.
+
 To test a genuinely empty checkout from an existing working copy with a validated
 reference CSV, run:
 
@@ -87,3 +95,8 @@ NumPy 2.2.6, scikit-learn 1.7.2 and PyTorch 2.8.0. It installed weights from the
 public release in a separate environment and generated identical CSV bytes and
 provenance. See [delivery evidence](PHASE7_DELIVERY.md). The final Kaizen upload
 document includes this completed check; the tag retains the original tooling snapshot.
+
+Phase 8 rechecked local Docker availability. The Linux ARM daemon answered its info
+request, but image enumeration failed with a container storage I/O error, preventing
+a container reproduction run. Linux target byte identity remains unverified. No
+runtime changes or Docker storage repair were performed. See [Phase 8](PHASE8_HARDENING.md).

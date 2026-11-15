@@ -89,8 +89,8 @@ do not contribute ownership loss. The receptive field spans 29 samples, or 5.6 s
 between endpoints. Inference uses 512-sample chunks with context halos and interpolates
 logits back to 25 Hz within each half.
 
-Geometry reliability q is zero for a missing ball. A trajectory residual with ±0.08-second neighbors
-residual and extreme-speed penalty reduce confidence in suspect detections, using
+Geometry reliability q is zero for a missing ball. A midpoint trajectory residual
+using neighbors ±0.08 seconds away and an extreme-speed penalty reduce confidence in suspect detections, using
 fixed scales of 3 metres and 15 m/s above 45 m/s. Unsupported visible edges receive
 q=0.5. Conditional tree ownership logits are scaled by 0.5+0.5q. The motion model
 then receives probability weight 0.35(1−q). Dead-ball emission mass is preserved.
@@ -160,6 +160,8 @@ the three externally trained checkpoints required by the frozen guard, plus a mo
 card and CC BY 4.0 attribution. Competition data and predictions are excluded.
 
 ```sh
+git clone --branch inference-v1 --single-branch https://github.com/prithvi-kaizen/More-Than-A-Hack-.git
+cd More-Than-A-Hack-
 uv sync --frozen --extra temporal
 uv run --frozen --extra temporal python scripts/download_checkpoints.py
 LOKY_MAX_CPU_COUNT=2 uv run --frozen --extra temporal python scripts/infer_target.py \

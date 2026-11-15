@@ -26,11 +26,32 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def check_existing_package(out, name):
+    manifest = out/'manifest.json'
+    if manifest.exists():
+        record = json.loads(manifest.read_text())
+        if record['team_name'] != name:
+            raise ValueError('EXISTING_PACKAGE_TEAM_MISMATCH')
+        if record.get('submitted') is not False:
+            raise ValueError('EXISTING_PACKAGE_SUBMISSION_STATUS_REQUIRES_REVIEW')
+
+
+def preserve_handoff(path, instructions):
+    # Registration notes, form links and deadlines belong to the participant.
+    try:
+        with path.open('x', encoding='utf-8') as stream:
+            stream.write(instructions)
+    except FileExistsError:
+        pass
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--team-name',required=True)
     args = parser.parse_args()
     name = team_filename(args.team_name)
+    out = ROOT/'outputs/phase7/upload'
+    check_existing_package(out, name)
     verify_freeze(ROOT)
     candidate = ROOT/'outputs/phase6/submission.csv'
     original = json.loads(candidate.with_suffix('.report.json').read_text())
@@ -39,7 +60,6 @@ def main():
     contract = organizer_contract(ROOT)
     if metrics.validate_submission(metrics.read_label_csv(candidate),contract['n_frames']):
         raise ValueError('CANDIDATE_VALIDATION_FAILED')
-    out = ROOT/'outputs/phase7/upload'
     out.mkdir(parents=True,exist_ok=True)
     csv = out/(name+'.csv')
     document = out/(name+'.md')
@@ -51,6 +71,7 @@ def main():
     if metrics.validate_submission(metrics.read_label_csv(csv),contract['n_frames']):
         raise ValueError('PACKAGED_CSV_VALIDATION_FAILED')
     log = ROOT/'local_reports/phase7_packaged_validator.log'
+    log.parent.mkdir(parents=True,exist_ok=True)
     with log.open('w') as stream:
         result = subprocess.run([sys.executable,str(ROOT/'vendor/mtah/evaluation/validate_submission.py'),
                                  str(csv)],stdout=stream,stderr=subprocess.STDOUT)
@@ -62,7 +83,7 @@ def main():
         'Use the submission form emailed to registered participants. The organizer states '
         '17 November 2026; check the exact cutoff time in that email. '
         'This package has not been submitted. Read the technical document and confirm its claims before uploading.\n')
-    (out/'UPLOAD_INSTRUCTIONS.md').write_text(instructions,encoding='utf-8')
+    preserve_handoff(out/'UPLOAD_INSTRUCTIONS.md', instructions)
     manifest = dict(team_name=name,files={p.name:dict(sha256=digest(p),bytes=p.stat().st_size)
                     for p in [csv,document]},csv_byte_equality='PASS',official_validator='PASS',
                     repository='https://github.com/prithvi-kaizen/More-Than-A-Hack-',submitted=False)

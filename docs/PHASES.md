@@ -266,3 +266,26 @@ added audit tooling and clarified plan status; frozen inference source, checkpoi
 weights, candidate CSV and submitted-document contents were not changed. No form or
 organizer message was sent. Stop after the review's GitHub update; do not begin Phase 8
 without the participant's next instruction.
+
+## Phase 8 — delivery hardening (technical work complete)
+
+The user authorized Phase 8. Packaging reruns preserve existing handoff bytes and
+reject a different team name or an already-submitted manifest before writing package
+files. Validator-log directories are created when missing. The report includes the
+pinned clone command and clearer reliability wording. Two synthetic regression tests
+exercise complete package reruns and rejected overwrites; both frozen suites pass all
+82 tests.
+
+Backed up and regenerated the exact private package twice. Candidate CSV and handoff
+bytes stayed identical, report/manifest updates agree, both official validators pass,
+and the status-only review audit passes. Frozen runtime and checkpoint weights are
+unchanged. No fitting, target quality evaluation or output/video comparison occurred.
+
+Local Linux verification could not run: Docker reported a Linux ARM daemon, but its
+image store failed with a storage I/O error. The macOS arm64 public-clone reproduction
+remains verified; Linux target byte identity remains explicitly unverified.
+
+Eligibility remains unresolved pending the organizer's response about team size.
+Prepared a private inquiry for the participant; no message or submission was sent.
+See [Phase 8 record](PHASE8_HARDENING.md). After this phase's GitHub update, stop;
+Phase 9 external reliability experiments need a new user instruction.

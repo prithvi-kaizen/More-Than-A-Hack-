@@ -6,12 +6,15 @@ import sys
 import tarfile
 import tempfile
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 sys.path.insert(0,str(ROOT/'scripts'))
 from mtah.checkpoints import CHECKPOINTS,installed,unpack_verified
 from package_submission import team_filename
+import package_submission
 
 
 class CheckpointTests(unittest.TestCase):
@@ -76,3 +79,61 @@ class TeamNameTests(unittest.TestCase):
             self.assertEqual(team_filename(name),name)
         for name in ['', ' team','team ','.','..','a/b','a\\b','a\nb','x'*101]:
             with self.assertRaises(ValueError):team_filename(name)
+
+
+class PackageRerunTests(unittest.TestCase):
+    def fixture(self, root):
+        candidate = root/'outputs/phase6/submission.csv'
+        candidate.parent.mkdir(parents=True)
+        candidate.write_bytes(b'frame,label\n0,X\n1,H\n2,D\n3,A\n')
+        candidate.with_suffix('.report.json').write_text(json.dumps(
+            dict(csv_sha256=hashlib.sha256(candidate.read_bytes()).hexdigest())))
+        report = root/'docs/TECHNICAL_REPORT.md'
+        report.parent.mkdir()
+        report.write_text('Synthetic technical document.\n')
+        return candidate, report
+
+    def package(self, root, team='Kaizen'):
+        with patch.object(package_submission, 'ROOT', root), \
+                patch.object(package_submission, 'verify_freeze'), \
+                patch.object(package_submission, 'organizer_contract', return_value={'n_frames':4}), \
+                patch.object(package_submission.subprocess, 'run', return_value=SimpleNamespace(returncode=0)), \
+                patch.object(sys, 'argv', ['package_submission.py', '--team-name', team]):
+            package_submission.main()
+
+    def test_repackage_preserves_handoff_and_csv_but_refreshes_document(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            candidate,report=self.fixture(root)
+            self.package(root)
+            out=root/'outputs/phase7/upload'
+            handoff=out/'UPLOAD_INSTRUCTIONS.md'
+            private=b'Private form: https://example.invalid/form\r\nCutoff: confirmed locally\r\n'
+            handoff.write_bytes(private)
+            report.write_text('Revised synthetic technical document.\n')
+            self.package(root)
+            self.assertEqual(handoff.read_bytes(),private)
+            self.assertEqual((out/'Kaizen.csv').read_bytes(),candidate.read_bytes())
+            self.assertEqual((out/'Kaizen.md').read_text(),'Team: Kaizen\n\n'+report.read_text())
+            manifest=json.loads((out/'manifest.json').read_text())
+            for name in ['Kaizen.csv','Kaizen.md']:
+                self.assertEqual(manifest['files'][name]['sha256'],
+                                 hashlib.sha256((out/name).read_bytes()).hexdigest())
+
+    def test_team_change_and_submitted_status_fail_before_package_writes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            self.fixture(root)
+            self.package(root)
+            out=root/'outputs/phase7/upload'
+            before={p.name:p.read_bytes() for p in out.iterdir()}
+            with self.assertRaisesRegex(ValueError,'TEAM_MISMATCH'):
+                self.package(root,'Different Team')
+            self.assertEqual(before,{p.name:p.read_bytes() for p in out.iterdir()})
+            manifest=json.loads((out/'manifest.json').read_text())
+            manifest['submitted']=True
+            (out/'manifest.json').write_text(json.dumps(manifest))
+            before={p.name:p.read_bytes() for p in out.iterdir()}
+            with self.assertRaisesRegex(ValueError,'SUBMISSION_STATUS'):
+                self.package(root)
+            self.assertEqual(before,{p.name:p.read_bytes() for p in out.iterdir()})

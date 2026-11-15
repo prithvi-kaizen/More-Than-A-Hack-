@@ -1,6 +1,6 @@
 # More Than a Hack 2027: research and implementation plan
 
-Originally prepared 14 November 2026; status updated 15 November 2026. Phases 0–7
+Originally prepared 14 November 2026; status updated 15 November 2026. Phases 0–8
 are complete and the Kaizen submission is packaged and locally reproduced. The
 original design sections below are historical proposals; the phase outcome sections
 record what was actually built. No competition accuracy or rank has been measured.
@@ -8,8 +8,9 @@ record what was actually built. No competition accuracy or rank has been measure
 The current [submission review and improvement plan](../docs/SUBMISSION_REVIEW.md)
 supersedes earlier prospective next-step statements. It prioritizes eligibility and
 delivery hardening, then a bounded external-only reliability experiment, then an
-independently checked release decision. These optional Phases 8–10 have not started
-and require separate user authorization. Preserve the frozen v1 submission throughout.
+independently checked release decision. Phase 8 technical hardening is complete;
+eligibility still requires an organizer response. Phases 9–10 have not started and
+require separate user authorization. Preserve the frozen v1 submission throughout.
 
 ## Recommendation
 
@@ -490,3 +491,30 @@ action belongs to the participant: review the technical document, verify registr
 details and upload the named CSV/Markdown with the public repository URL via the
 organizer's form. Do not start another modelling phase or use final-test/target
 outputs for tuning. Future work would need a new task and a new evaluation protocol.
+
+### Phase 8 delivery hardening and next experiment
+
+The user authorized Phase 8 after the submission review. Repackaging now preserves
+existing private handoff instructions, checks team/submission-status conflicts before
+writes, and creates the validator-log directory when absent. Two synthetic end-to-end
+regression tests cover reruns and rejected overwrites. Both frozen suites passed 82
+tests. The exact package was backed up and regenerated twice: candidate CSV/handoff
+bytes stayed identical, the revised technical document and manifest agree, and the
+official validators and status-only local audit passed. The report now includes the
+pinned clone command and corrects duplicated reliability wording.
+
+The Docker daemon answered as Linux ARM, but image enumeration failed with an
+existing storage I/O error. Linux target-byte reproduction remains unverified; the
+completed macOS arm64 replay is the supported reproduction path. No model/runtime
+changes, Docker storage repair or target-quality inspection occurred.
+
+Eligibility remains unresolved: the user reported one registered member, and no
+organizer-approved exception/team change has been supplied. A concise inquiry and
+status record are private in `outputs/phase8/`; no message was sent. The participant
+must resolve eligibility independently of the technical experiment.
+
+Phase 9 is next only on a new user authorization. Follow the bounded reliability
+experiment and predeclared adoption gates in `docs/SUBMISSION_REVIEW.md`, preserve
+v1, and keep the opened final external games out of selection. Do not expand into
+several challenger architectures or target-based tuning. Stop after Phase 8's checks,
+plan update and GitHub push. See `docs/PHASE8_HARDENING.md` for the completed scope.
