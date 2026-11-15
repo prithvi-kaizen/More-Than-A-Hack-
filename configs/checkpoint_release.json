@@ -1,0 +1,21 @@
+{
+  "tag": "models-v1",
+  "asset": "external-checkpoints-v1.tar.gz",
+  "license": "CC-BY-4.0",
+  "url": "https://github.com/prithvi-kaizen/More-Than-A-Hack-/releases/download/models-v1/external-checkpoints-v1.tar.gz",
+  "archive_sha256": "337de1b0847cc06d5515b4b70ab7807aa4f58b2125a46ab6f2994bd7b0c279e7",
+  "archive_bytes": 597573,
+  "members": {
+    "outputs/phase4/model.pkl": "0bb7d30ec081391d10c6a87995e12e52b23ace849850571c77b7c86624bb449f",
+    "outputs/phase5/motion.pt": "171be8c187be9417eb609c54516b8849c6da7ce6716e44eabc46fabf02d62c12",
+    "outputs/phase3/model.pkl": "7f36978b9566064b33f60ec43afe5e971406b21dc793f657cef6cae6bc3ac5b3",
+    "MODEL_CARD.md": "5b8d99bc491ad549896736254f6871dde61707dc51546d3c969b93bea72db0c0",
+    "MODEL_LICENSE.md": "188d37d0fba2af0a1487128618f69431908f32794c0cfdc010c1a97ab1f65314"
+  },
+  "checkpoints": {
+    "outputs/phase4/model.pkl": "0bb7d30ec081391d10c6a87995e12e52b23ace849850571c77b7c86624bb449f",
+    "outputs/phase5/motion.pt": "171be8c187be9417eb609c54516b8849c6da7ce6716e44eabc46fabf02d62c12",
+    "outputs/phase3/model.pkl": "7f36978b9566064b33f60ec43afe5e971406b21dc793f657cef6cae6bc3ac5b3"
+  },
+  "compatible_runtime_commit": "59991894aed6595476f15a64602fa447fa89a324"
+}

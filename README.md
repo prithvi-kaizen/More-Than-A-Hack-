@@ -1,8 +1,9 @@
 # More Than a Hack: possession inference
 
 Local implementation for the Metrica Sports More Than a Hack 2027 possession challenge.
-Phase 6 freezes the player-motion fusion model, tests it on the two final external
-holdouts, and generates a validated local competition CSV. Packaging is the next phase.
+The frozen player-motion fusion model has been tested on two final external games
+and generates a validated local competition CSV. Externally trained checkpoints,
+technical documentation and reproduction tools are now available.
 
 ## Setup and verification
 
@@ -38,16 +39,21 @@ structured-noise spellF1 is 0.5309 versus 0.4554. The selected model was unchang
 after these tests. See [Phase 6](docs/PHASE6_INFERENCE.md) for exact conditions,
 limitations, frozen artifacts and reproduction commands.
 
-With the local checkpoints and tactical bundle available, generate the CSV with:
+Download the public externally trained checkpoints, then generate the CSV with the
+locally supplied tactical bundle:
 
 ```sh
+uv run --frozen --extra temporal python scripts/download_checkpoints.py
 LOKY_MAX_CPU_COUNT=2 uv run --frozen --extra temporal python scripts/infer_target.py
 ```
 
 The candidate stays in `outputs/phase6/submission.csv`. Two independent full runs
 produced identical CSV bytes and passed the pinned official validator. These checks
 establish format and local reproduction; competition prediction accuracy is unmeasured.
-Team naming, technical-document delivery and checkpoint distribution are Phase 7 work.
+See [reproduction instructions](docs/REPRODUCTION.md), the
+[technical document](docs/TECHNICAL_REPORT.md), and the
+[public model release](https://github.com/prithvi-kaizen/More-Than-A-Hack-/releases/tag/models-v1).
+The upload package uses the team's exact registered name and stays local.
 
 Place the separately licensed competition bundle in `data/tactical/` and
 `data/broadcast/`, retaining the organizer filenames. To check local inputs:
