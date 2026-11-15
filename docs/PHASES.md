@@ -181,13 +181,49 @@ local. See [method](PHASE5_MODEL.md), [results](phase5_results.json) and
 [selection manifest](../configs/phase5_selected.json). No final holdout or competition
 inference was run.
 
-## Phase 6 — pending user instruction
+## Phase 6 — frozen final tests and local inference (complete)
 
-Freeze selected artifacts before evaluating the two final external holdouts. Preserve
-their role as independent tests rather than another tuning set. Implement local tactical
-inference, validate the organizer CSV and require byte-identical reproduction from
-independent checkpoint loads. Target-based tuning, video comparison and new unvalidated
-model components remain excluded. Packaging/submission belongs to Phase 7.
+* Froze selected weights, decoder settings, feature sources and dependencies before
+  acquiring final holdouts; froze tested execution code before opening their performance.
+* Acquired, publisher-verified, prepared and losslessly compressed J03WQQ/J03WR9.
+  A separate final-test loader preserves the original training/development guards.
+* Evaluated three frozen models on both halves and all four fixed conditions.
+  No model selection, fitting or parameter changes followed final-test scores.
+* Added the tactical ATD adapter, full-length CSV generation, private validator logs,
+  raw-input integrity checks and independent-process byte reproduction.
+
+| Final external model | Mean spellF1, original scenes | Structured spellF1 |
+|---|---:|---:|
+| Phase 3 | 0.5328 | 0.4283 |
+| Phase 4 | 0.5607 | 0.4554 |
+| Selected motion fusion | 0.5901 | 0.5309 |
+
+The selected model improves every match/condition comparison with Phase 4. Pooled
+structured short-spell recall improves from 12.8% to 19.0%, and long-spell recall
+from 90.6% to 94.5%. Short spells remain weak. Two same-provider external tests do
+not establish accuracy on the competition camera or its possession convention.
+
+All 75 synthetic tests passed. The inference wrapper replayed existing development
+scores exactly, and reloaded checkpoints replayed all final-holdout probabilities,
+labels and metrics exactly. Two independent complete target runs produced identical
+CSV bytes; both pinned validator function/CLI checks passed. The CSV has the required
+199,319 rows. Only coarse target statuses are published; predictions and detailed
+reports remain local. No target labels, manual corrections or video comparison were used.
+
+The validated candidate is `outputs/phase6/submission.csv`. Target checks overlapped
+the remaining external transfer under the already frozen model. See
+[method and reproduction](PHASE6_INFERENCE.md), [aggregates](phase6_results.json),
+[selection freeze](../configs/phase6_frozen.json) and
+[execution freeze](../configs/phase6_execution_frozen.json).
+
+## Phase 7 — pending user instruction
+
+Prepare team-named upload files and a short technical document. Complete the checkpoint
+distribution route and test exact reproduction in a fresh checkout with the required
+three local checkpoint files. Revalidate the exact final CSV and keep restricted
+inputs/predictions out of the public repository. No further model tuning is planned.
+Registration, team details and form submission remain team responsibilities unless
+the user explicitly authorizes assistance with them.
 
 Each phase ends with checks, plan updates and a GitHub push, followed by a stop.
 The next phase begins only when the user asks to continue.

@@ -1,8 +1,8 @@
 # More Than a Hack: possession inference
 
 Local implementation for the Metrica Sports More Than a Hack 2027 possession challenge.
-Phase 5 adds a player-motion temporal expert and reliability-weighted fusion to the
-control/adaptive-boundary model. Competition inference remains a later phase.
+Phase 6 freezes the player-motion fusion model, tests it on the two final external
+holdouts, and generates a validated local competition CSV. Packaging is the next phase.
 
 ## Setup and verification
 
@@ -30,9 +30,24 @@ with 0.5373 for Phase 4, 0.4926 for Phase 3 and 0.2379 for official smooth50. Th
 selection-set results use IDSSE provider labels and do not estimate a competition score. Brief possessions
 and unreliable geometry remain limitations. See the [Phase 5 method](docs/PHASE5_MODEL.md)
 for the four-match comparison, robustness guards and reproduction commands. Motion
-fusion improved every training-match fold; final holdouts remain unseen. The
-[selected manifest](configs/phase5_selected.json) identifies the local checkpoints
-and source hashes required for the next phase.
+fusion improved every training-match fold. The [selected manifest](configs/phase5_selected.json)
+identifies the local checkpoints and source hashes.
+
+Final external holdout mean spellF1 is **0.5901**, compared with 0.5607 for Phase 4;
+structured-noise spellF1 is 0.5309 versus 0.4554. The selected model was unchanged
+after these tests. See [Phase 6](docs/PHASE6_INFERENCE.md) for exact conditions,
+limitations, frozen artifacts and reproduction commands.
+
+With the local checkpoints and tactical bundle available, generate the CSV with:
+
+```sh
+LOKY_MAX_CPU_COUNT=2 uv run --frozen --extra temporal python scripts/infer_target.py
+```
+
+The candidate stays in `outputs/phase6/submission.csv`. Two independent full runs
+produced identical CSV bytes and passed the pinned official validator. These checks
+establish format and local reproduction; competition prediction accuracy is unmeasured.
+Team naming, technical-document delivery and checkpoint distribution are Phase 7 work.
 
 Place the separately licensed competition bundle in `data/tactical/` and
 `data/broadcast/`, retaining the organizer filenames. To check local inputs:

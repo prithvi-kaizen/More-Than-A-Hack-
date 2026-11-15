@@ -410,3 +410,43 @@ video comparison may guide model changes. Detailed predictions remain local.
 Do not add tag fusion, duration constraints or camera fusion during final inference:
 none has the required external validation. Publish source code, external aggregate
 results and the revised phase record; stop again before Phase 7 packaging/submission.
+
+### Phase 6 results and Phase 7 requirements
+
+Phase 6 is complete. Selection artifacts were frozen before acquiring the two reserved
+games, and execution code was frozen before scoring them. Both publisher-verified
+holdouts were prepared and compressed losslessly. A separate final-test loader keeps
+training access unchanged. Frozen Phase 3/Phase 4/motion-fusion mean spellF1 over
+clean/moderate/severe conditions is 0.5328/0.5607/0.5901; structured-noise spellF1 is
+0.4283/0.4554/0.5309. Motion fusion improves every condition of each held-out game.
+Structured short-spell recall improves from Phase 4's 12.8% to 19.0%, and long-spell
+recall from 90.6% to 94.5%. No fitting, selection or parameter changes followed these
+independent results. Both tests still share the external provider's possession
+convention, so competition transfer remains unmeasured.
+
+The tactical adapter uses organizer-published frame/pitch conventions, converts ATD
+record k to video frame k-1, preserves missing/out-of-field observations and processes
+halves independently. It uses only tactical metadata/tracking. The complete inference
+CLI ran twice in independent processes, reread raw inputs and reloaded checkpoints,
+generated identical CSV bytes and passed both pinned validation interfaces. Detailed
+predictions, hashes and logs stay local; no target label/video comparison or tuning
+occurred. Target inference overlapped the second external download because its model
+was already frozen and independent of holdout outcomes.
+
+All 75 synthetic tests passed. The new wrapper reproduced existing development scores;
+independent checkpoint reloads reproduced every final-holdout probability, decoded
+label and metric. The candidate is `outputs/phase6/submission.csv`; public method,
+aggregates and hashes for the frozen records are documented in `docs/PHASE6_INFERENCE.md`
+and `docs/phase6_results.json`.
+
+Phase 7 should concentrate on delivery. Obtain the team's chosen name, create the
+team-named CSV and short technical document, and settle a reproducible distribution
+route for the external-trained checkpoints. The freeze guard currently requires all
+three checkpoint files, including the Phase 3 comparator. Verify a fresh-checkout
+prediction run against the exact candidate bytes, validate the final upload file,
+and keep competition data/derived predictions outside public Git history. Explain
+the provider-label/competition-definition gap, missing-ball behavior and remaining
+short-spell limitations in the technical document. Do not introduce another model
+family or tune against the now-open final tests. The original form submission stays
+with the team unless explicitly authorized. Phase 7 requires the user's next call
+after the Phase 6 GitHub update and stop.
