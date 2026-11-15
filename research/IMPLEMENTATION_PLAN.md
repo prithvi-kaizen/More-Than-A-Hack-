@@ -1,6 +1,15 @@
 # More Than a Hack 2027: research and implementation plan
 
-Prepared and revised 14 November 2026 after local asset consolidation. This is a proposed solution, not a trained system or a measured competition result.
+Originally prepared 14 November 2026; status updated 15 November 2026. Phases 0–7
+are complete and the Kaizen submission is packaged and locally reproduced. The
+original design sections below are historical proposals; the phase outcome sections
+record what was actually built. No competition accuracy or rank has been measured.
+
+The current [submission review and improvement plan](../docs/SUBMISSION_REVIEW.md)
+supersedes earlier prospective next-step statements. It prioritizes eligibility and
+delivery hardening, then a bounded external-only reliability experiment, then an
+independently checked release decision. These optional Phases 8–10 have not started
+and require separate user authorization. Preserve the frozen v1 submission throughout.
 
 ## Recommendation
 

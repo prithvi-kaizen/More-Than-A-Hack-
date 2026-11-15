@@ -240,3 +240,29 @@ submits the form; no form submission was made by the tools.
 
 Each phase ends with checks, plan updates and a GitHub push, followed by a stop.
 The next phase begins only when the user asks to continue.
+
+## Post-delivery submission review — complete, 15 November 2026
+
+Reviewed current organizer requirements, the inference/evaluation implementation,
+external evidence and the exact local upload package. Both frozen test commands
+passed all 80 tests. A new read-only local audit independently checks CSV structure,
+runs both official validators, verifies input/freeze/package hashes and saved replay
+bytes, recomputes published external aggregates, and checks restricted artifact paths
+through reachable Git history. All these checks passed. Detailed target information
+remains local; no fitting or target quality evaluation occurred.
+
+Synthetic counterexamples confirm that smooth false-ball offsets evade the current
+geometry reliability score and missing-ball frames suppress its adaptive boundary
+assistance. These are improvement hypotheses, not demonstrated target errors. Short
+possessions, same-provider validation and unverified cross-platform target byte
+identity remain limitations. Team-size eligibility needs explicit resolution under
+the organizer's 3–5-member rule; technical completion does not establish advancement
+eligibility or a top-20 rank.
+
+The [review and improvement plan](SUBMISSION_REVIEW.md) defines optional Phases 8–10
+with fixed external selection gates and a preserved v1 fallback. It also records a
+packaging handoff overwrite issue for a later authorized hardening phase. This review
+added audit tooling and clarified plan status; frozen inference source, checkpoint
+weights, candidate CSV and submitted-document contents were not changed. No form or
+organizer message was sent. Stop after the review's GitHub update; do not begin Phase 8
+without the participant's next instruction.
