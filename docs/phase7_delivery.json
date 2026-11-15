@@ -1,0 +1,40 @@
+{
+  "team_name": "Kaizen",
+  "synthetic_tests_passed": 80,
+  "clean_public_checkout": {
+    "source_commit": "da7343eae56abe2f2b72fb88da19fbad5e14993d",
+    "source_tag": "inference-v1",
+    "initial_data_models_environment_absent": true,
+    "anonymous_source_clone": "PASS",
+    "separate_locked_environment": "PASS",
+    "public_checkpoint_download": "PASS",
+    "csv_byte_equality": "PASS",
+    "input_and_freeze_equality": "PASS",
+    "official_validator": "PASS",
+    "environment": {
+      "python": "3.12.4",
+      "system": "Darwin",
+      "architecture": "arm64",
+      "torch": "2.8.0",
+      "numpy": "2.2.6",
+      "sklearn": "1.7.2"
+    }
+  },
+  "checkpoint_release": {
+    "release_url": "https://github.com/prithvi-kaizen/More-Than-A-Hack-/releases/tag/models-v1",
+    "asset_url": "https://github.com/prithvi-kaizen/More-Than-A-Hack-/releases/download/models-v1/external-checkpoints-v1.tar.gz",
+    "public_download_sha256": "PASS",
+    "uploaded_contents": "external_checkpoints_and_attribution_only"
+  },
+  "upload_package": {
+    "csv": "outputs/phase7/upload/Kaizen.csv",
+    "technical_document": "outputs/phase7/upload/Kaizen.md",
+    "csv_byte_equality": "PASS",
+    "official_validator": "PASS"
+  },
+  "frozen_runtime_changed": false,
+  "model_weights_changed": false,
+  "competition_data_published": false,
+  "competition_predictions_published": false,
+  "form_submitted": false
+}

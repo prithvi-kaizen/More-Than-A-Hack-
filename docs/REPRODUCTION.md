@@ -46,7 +46,7 @@ comparator. They total about 1.3 MB before compression. This path does not retra
 ```sh
 uv run --frozen --extra temporal python -m unittest discover -s tests -v
 LOKY_MAX_CPU_COUNT=2 uv run --frozen --extra temporal python scripts/audit_target_replay.py
-uv run --frozen --extra temporal python scripts/package_submission.py --team-name 'REGISTERED TEAM NAME'
+uv run --frozen --extra temporal python scripts/package_submission.py --team-name Kaizen
 ```
 
 The team-name argument must be the exact registered name. It creates the team-named
@@ -81,3 +81,9 @@ as the submitted model. Final holdout scores must not be used for further select
 The current reproduction claim is limited to the recorded operating system,
 architecture and locked software environment. The synthetic CI suite runs on Linux;
 that does not establish cross-platform byte identity on the competition game.
+
+The public `inference-v1` checkout test passed on macOS arm64 with Python 3.12.4,
+NumPy 2.2.6, scikit-learn 1.7.2 and PyTorch 2.8.0. It installed weights from the
+public release in a separate environment and generated identical CSV bytes and
+provenance. See [delivery evidence](PHASE7_DELIVERY.md). The final Kaizen upload
+document includes this completed check; the tag retains the original tooling snapshot.

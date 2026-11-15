@@ -450,3 +450,34 @@ short-spell limitations in the technical document. Do not introduce another mode
 family or tune against the now-open final tests. The original form submission stays
 with the team unless explicitly authorized. Phase 7 requires the user's next call
 after the Phase 6 GitHub update and stop.
+
+### Phase 7 delivery and final state
+
+The participant supplied the registered name Kaizen. The exact validated candidate
+was copied to `outputs/phase7/upload/Kaizen.csv`; a team-named Markdown technical
+document was generated from `docs/TECHNICAL_REPORT.md`. Both validation interfaces
+pass on the exact upload CSV and its bytes match Phase 6. Private instructions
+include the organizer's form link and confirmed cutoff. The form has not been submitted.
+
+Checkpoint distribution is resolved through the public `models-v1` GitHub release:
+three externally trained checkpoint files plus model card/licence, CC BY 4.0 with
+DFL/Bassek et al. attribution. The 597,573-byte compressed archive and every member
+have pinned SHA-256 hashes. The installer rejects changed/extra/missing/duplicate/
+linked members and conflicting destinations before installing files. Competition
+data, predictions and detailed reports are excluded from public Git history and assets.
+
+The public `inference-v1` source tag, commit da7343eae56abe2f2b72fb88da19fbad5e14993d,
+passed a genuinely fresh anonymous clone test. No data, models, environment or feature
+cache existed there. A separate locked environment and anonymous public checkpoint
+download supported a full local inference run against the original bundle; candidate
+CSV bytes, input/freeze provenance and official validation matched exactly. The test
+environment was macOS arm64, Python 3.12.4, NumPy 2.2.6, scikit-learn 1.7.2 and
+PyTorch 2.8.0. Other platforms' target-data byte identity remains unverified. All
+80 synthetic tests passed; subsequent delivery documentation leaves tested runtime
+files, model weights and frozen records unchanged.
+
+Implementation is complete. Preserve the current selection and artifacts. The next
+action belongs to the participant: review the technical document, verify registration
+details and upload the named CSV/Markdown with the public repository URL via the
+organizer's form. Do not start another modelling phase or use final-test/target
+outputs for tuning. Future work would need a new task and a new evaluation protocol.

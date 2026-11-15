@@ -89,7 +89,7 @@ do not contribute ownership loss. The receptive field spans 29 samples, or 5.6 s
 between endpoints. Inference uses 512-sample chunks with context halos and interpolates
 logits back to 25 Hz within each half.
 
-Geometry reliability q is zero for a missing ball. A centered 0.08-second trajectory
+Geometry reliability q is zero for a missing ball. A trajectory residual with ±0.08-second neighbors
 residual and extreme-speed penalty reduce confidence in suspect detections, using
 fixed scales of 3 metres and 15 m/s above 45 m/s. Unsupported visible edges receive
 q=0.5. Conditional tree ownership logits are scaled by 0.5+0.5q. The motion model
@@ -179,6 +179,12 @@ Two independent full processes reread inputs, reloaded models and generated iden
 CSV bytes. Final-test checkpoints also exactly replayed probabilities, labels and
 metrics. These checks establish file validity and local numerical reproduction, not
 target accuracy. Cross-platform byte identity requires separate verification.
+
+A fresh anonymous checkout of the public `inference-v1` tag also reproduced the
+candidate exactly after installing a separate locked environment and downloading
+the public checkpoints. The verified environment was macOS arm64, Python 3.12.4,
+NumPy 2.2.6, scikit-learn 1.7.2 and PyTorch 2.8.0. No training data, prior model
+files or feature caches were present in that checkout.
 
 Before uploading, read this document and confirm the team details and claims. The
 team-named Markdown/CSV package is generated from this report and the unchanged

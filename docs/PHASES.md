@@ -216,14 +216,27 @@ the remaining external transfer under the already frozen model. See
 [selection freeze](../configs/phase6_frozen.json) and
 [execution freeze](../configs/phase6_execution_frozen.json).
 
-## Phase 7 — pending user instruction
+## Phase 7 — packaging and clean public reproduction (complete)
 
-Prepare team-named upload files and a short technical document. Complete the checkpoint
-distribution route and test exact reproduction in a fresh checkout with the required
-three local checkpoint files. Revalidate the exact final CSV and keep restricted
-inputs/predictions out of the public repository. No further model tuning is planned.
-Registration, team details and form submission remain team responsibilities unless
-the user explicitly authorizes assistance with them.
+* Created `Kaizen.csv` and `Kaizen.md` using the participant's registered team name.
+  The CSV bytes match the Phase 6 candidate exactly and the exact upload file passes
+  both pinned validation interfaces. The document covers method, assets, labelled-data
+  provenance/amount, possession semantics, selection, limits and reproduction.
+* Published only the externally trained checkpoints/card/licence as `models-v1`, with
+  CC BY 4.0 attribution and pinned archive/member hashes. No competition data or
+  predictions were uploaded. The archive's anonymous public download hash matches.
+* Published tested source as `inference-v1`. A fresh anonymous public clone began
+  without data/models/environment, installed a separate locked environment, downloaded
+  public weights and reproduced the candidate CSV and provenance exactly.
+* Added strict checkpoint installation and private team-package tooling. All 80
+  synthetic tests passed. Target details remain local and frozen runtime/weights
+  were unchanged. Verification is macOS arm64; Linux CI uses synthetic data only.
+
+The private upload files are under `outputs/phase7/upload/`, with a manifest and
+handoff instructions. The public [delivery record](PHASE7_DELIVERY.md) and
+[technical report](TECHNICAL_REPORT.md) document completed checks and their scope.
+All implementation phases are complete. The participant reviews the document and
+submits the form; no form submission was made by the tools.
 
 Each phase ends with checks, plan updates and a GitHub push, followed by a stop.
 The next phase begins only when the user asks to continue.
