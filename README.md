@@ -54,10 +54,12 @@ See [reproduction instructions](docs/REPRODUCTION.md), the
 [technical document](docs/TECHNICAL_REPORT.md), and the
 [public model release](https://github.com/prithvi-kaizen/More-Than-A-Hack-/releases/tag/models-v1).
 The upload package uses the team's exact registered name and stays local.
-For **Kaizen**, the final upload files are `outputs/phase7/upload/Kaizen.csv` and
-`outputs/phase7/upload/Kaizen.md`. A fresh anonymous public checkout, separate locked
+For **Kaizen**, the exact submitted files are `outputs/phase10/upload/Kaizen.csv` and
+`outputs/phase10/upload/Kaizen.md`. A fresh anonymous public checkout, separate locked
 environment and public weight download reproduced the candidate exactly on macOS arm64.
-See the [delivery record](docs/PHASE7_DELIVERY.md). Form submission remains pending.
+See the [delivery record](docs/PHASE7_DELIVERY.md) and
+[recorded submission](docs/PHASE10_SUBMITTED.md). The official form confirmed receipt
+on 17 November 2026. Submission confirmation does not establish eligibility or ranking.
 
 Place the separately licensed competition bundle in `data/tactical/` and
 `data/broadcast/`, retaining the organizer filenames. To check local inputs:

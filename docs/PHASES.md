@@ -317,3 +317,22 @@ See [Phase 9 report](PHASE9_RELIABILITY.md), [protocol](PHASE9_PROTOCOL.md) and
 [aggregate results](phase9_results.json). Eligibility remains unresolved; no organizer
 message or form submission was sent. After this phase's GitHub push, stop. Phase 10
 is final delivery closure on v1 and needs the participant's next instruction.
+
+## Phase 10 — final delivery and submission (complete)
+
+The participant acknowledged the solo-team restriction and explicitly requested
+submission. Sealed `Kaizen.csv` and `Kaizen.md` under private `outputs/phase10/upload/`;
+verified the CSV matches v1, the document is current, and both official validators pass.
+The public checkpoint release remains available. No model, weight or prediction changed.
+
+Submitted the sealed pair and public repository URL through the official form with
+the participant's accurate sole-member details. The form displayed “Se ha registrado
+tu respuesta” after the submit action. The confirmation tab and browser screenshot
+were retained. Private file hashes and confirmation details are recorded locally;
+pre-submission manifests are backed up and live manifests are marked submitted.
+
+The full frozen suite passes 95 tests, including three final-sealing regressions.
+No exception to team eligibility was asserted. Submission receipt is distinct from
+eligibility and scoring. See [final submission record](PHASE10_SUBMITTED.md).
+All planned phases are complete. Push this closure and stop; await organizer results
+or a new participant request.

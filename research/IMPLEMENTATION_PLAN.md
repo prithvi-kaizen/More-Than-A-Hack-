@@ -1,6 +1,6 @@
 # More Than a Hack 2027: research and implementation plan
 
-Originally prepared 14 November 2026; status updated 17 November 2026. Phases 0–9
+Originally prepared 14 November 2026; status updated 17 November 2026. Phases 0–10
 are complete and the Kaizen submission is packaged and locally reproduced. The
 original design sections below are historical proposals; the phase outcome sections
 record what was actually built. No competition accuracy or rank has been measured.
@@ -10,7 +10,9 @@ supersedes earlier prospective next-step statements. It prioritizes eligibility 
 delivery hardening, then a bounded external-only reliability experiment, then an
 independently checked release decision. Phase 9 rejected its challenger under the
 unchanged adoption gates; retain v1. Eligibility still requires an organizer response.
-Phase 10 delivery closure has not started and requires separate user authorization.
+Phase 10 submitted the sealed v1 pair through the official form, which confirmed
+receipt. The participant chose to submit with accurate sole-member details despite
+the team-size restriction. No eligibility exception or ranking is claimed.
 
 ## Recommendation
 
@@ -550,3 +552,18 @@ reproduction access and resolve team-size eligibility with the organizer. Actual
 submission remains with the participant unless expressly delegated. Any further
 reliability research needs new independent data and belongs after this submission.
 Stop after Phase 9 verification and GitHub push; Phase 10 needs the next user call.
+
+### Phase 10 outcome and final state
+
+The participant authorized continuation and submission while acknowledging the solo
+team restriction. Sealed the exact current CSV/Markdown pair locally, verified v1
+byte equality and both official validators, and checked the public model release.
+The Google Form accepted both files and the public repository URL with sole-member
+details, then displayed “Se ha registrado tu respuesta”. Submission evidence and
+file hashes are private under `outputs/phase10/`; manifests now record submission.
+
+Three synthetic sealing regressions bring the frozen suite to 95 passing tests.
+The CSV, inference source and weights remain v1. Submission is complete, while
+eligibility and ranking remain organizer decisions. No more implementation phases
+are planned. Complete the Phase 10 GitHub update and stop. Further model changes,
+organizer messages or replacement responses require a new participant request.

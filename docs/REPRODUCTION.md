@@ -1,5 +1,12 @@
 # Reproduce the submission
 
+The v1 files were submitted on 17 November 2026; see the
+[submission record](PHASE10_SUBMITTED.md). The exact private copies are under
+`outputs/phase10/upload/`, with the observed confirmation and file digests in the
+adjacent private receipt. Existing local package manifests are marked submitted, so
+packaging/sealing tools refuse to overwrite them. The commands below document how
+to reproduce the file from released weights, not an instruction to send another form.
+
 The `inference-v1` tag pins the source used for the clean-checkout test. Model weights
 are separate, immutable-by-hash `models-v1` release assets. These files were fitted
 only on the four licensed external training games; no competition data or predictions

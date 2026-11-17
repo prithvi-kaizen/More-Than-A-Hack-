@@ -1,5 +1,11 @@
 # Submission review and improvement plan
 
+Final update, 17 November: [Phase 10 submission](PHASE10_SUBMITTED.md) is complete.
+The official form confirmed receipt of the sealed v1 files. The participant requested
+submission with accurate sole-member details despite the team-size restriction; no
+eligibility exception is claimed. The analysis and phase proposals below are retained
+as the historical review and decision record.
+
 Reviewed 15 November 2026. Candidate: `models-v1` / `inference-v1`, team Kaizen.
 
 Update 17 November: [Phase 8 technical hardening](PHASE8_HARDENING.md) and the
