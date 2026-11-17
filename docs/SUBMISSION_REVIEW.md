@@ -2,11 +2,13 @@
 
 Reviewed 15 November 2026. Candidate: `models-v1` / `inference-v1`, team Kaizen.
 
-Update after authorization: [Phase 8 technical hardening](PHASE8_HARDENING.md) is
-complete. The package-overwrite issue below is fixed on current `main`, and the
-technical document's clone command/wording are updated. Linux reproduction remains
-unverified because Docker storage failed. Eligibility remains unresolved. Phases 9–10
-are still proposals; the findings below otherwise describe the original review.
+Update 17 November: [Phase 8 technical hardening](PHASE8_HARDENING.md) and the
+[Phase 9 reliability comparison](PHASE9_RELIABILITY.md) are complete. The package
+overwrite is fixed and the document is updated. The challenger gained 0.006281 but
+missed the predeclared 0.01 requirement, so retain v1. Linux reproduction remains
+unverified because Docker storage failed. Eligibility remains unresolved. Phase 10
+should close delivery on v1; the findings and original proposals below retain their
+historical review context.
 
 **Assessment: technically ready within the checked delivery scope; advancement
 eligibility needs resolution; top-20 competitiveness is unmeasured.** Preserve the
@@ -144,8 +146,9 @@ match are correlated; eight wins are not eight independent match replications.
 
 ## 4. Improvement plan: three optional phases
 
-Phase 8 technical work is complete; Phases 9–10 are **proposed, not started**. Each
-new phase requires the participant's next authorization, ends with verification and
+Phases 8–9 are complete. Phase 9 did not adopt its challenger, so Phase 10 should
+close the existing v1 delivery rather than seek new modelling improvements. Each new
+phase requires the participant's next authorization, ends with verification and
 a GitHub update, and stops. Preserve v1
 as the submission fallback throughout. Time estimates are planning budgets, not
 measured runtime or promised score gains.

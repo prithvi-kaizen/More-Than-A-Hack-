@@ -1,6 +1,6 @@
 # More Than a Hack 2027: research and implementation plan
 
-Originally prepared 14 November 2026; status updated 15 November 2026. Phases 0–8
+Originally prepared 14 November 2026; status updated 17 November 2026. Phases 0–9
 are complete and the Kaizen submission is packaged and locally reproduced. The
 original design sections below are historical proposals; the phase outcome sections
 record what was actually built. No competition accuracy or rank has been measured.
@@ -8,9 +8,9 @@ record what was actually built. No competition accuracy or rank has been measure
 The current [submission review and improvement plan](../docs/SUBMISSION_REVIEW.md)
 supersedes earlier prospective next-step statements. It prioritizes eligibility and
 delivery hardening, then a bounded external-only reliability experiment, then an
-independently checked release decision. Phase 8 technical hardening is complete;
-eligibility still requires an organizer response. Phases 9–10 have not started and
-require separate user authorization. Preserve the frozen v1 submission throughout.
+independently checked release decision. Phase 9 rejected its challenger under the
+unchanged adoption gates; retain v1. Eligibility still requires an organizer response.
+Phase 10 delivery closure has not started and requires separate user authorization.
 
 ## Recommendation
 
@@ -518,3 +518,35 @@ experiment and predeclared adoption gates in `docs/SUBMISSION_REVIEW.md`, preser
 v1, and keep the opened final external games out of selection. Do not expand into
 several challenger architectures or target-based tuning. Stop after Phase 8's checks,
 plan update and GitHub push. See `docs/PHASE8_HARDENING.md` for the completed scope.
+
+### Phase 9 outcome and Phase 10 scope
+
+Completed the single externally trained reliability challenger on 17 November 2026.
+The original four training games were held out in turn; validity fitting used two
+other games and sigmoid calibration used the third. Ten conditions and five fixed
+evaluation seeds produced 200 comparison cells (184 distinct input views). The
+existing tree/TCN folds were reused without refitting. The experiment did not read
+competition inputs/labels/video or the already-open final external games.
+
+Mean stress spellF1 improved from 0.483609 to 0.489890, winning all four matches;
+sustained false-ball gain was +0.024778 and independent-camera gain +0.006062.
+Long recall rose 0.003542; short recall fell slightly. All regression and targeted
+condition gates passed, but mean gain 0.006281 missed the fixed 0.01 requirement.
+Reject for adoption, skip development as declared, and preserve v1. These repeated
+training-match CV results are not independent tests or target accuracy estimates.
+
+The parallel scheduler's shared protocol-write race was repaired with parent-only
+writes and read-only worker verification. Original/repaired execution hashes are
+retained. No frozen experiment source, model setting, partition or selection gate
+was changed. Both full frozen suites passed 92 tests; the independent audit verified
+hashes, all saved official spell scores at each IoU, historical clean fold scores and
+aggregate arithmetic. Source, protocol, aggregate results and the retained/rejected
+decision are in `docs/PHASE9_RELIABILITY.md` and `docs/phase9_results.json`.
+
+Phase 10 should now close delivery using v1. No new boundary model, alive/dead head,
+parameter rescue or independent-data acquisition is required to preserve the already
+tested submission. Review the exact refreshed Kaizen document/CSV, confirm public
+reproduction access and resolve team-size eligibility with the organizer. Actual form
+submission remains with the participant unless expressly delegated. Any further
+reliability research needs new independent data and belongs after this submission.
+Stop after Phase 9 verification and GitHub push; Phase 10 needs the next user call.

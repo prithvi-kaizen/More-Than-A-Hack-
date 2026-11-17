@@ -289,3 +289,31 @@ Eligibility remains unresolved pending the organizer's response about team size.
 Prepared a private inquiry for the participant; no message or submission was sent.
 See [Phase 8 record](PHASE8_HARDENING.md). After this phase's GitHub update, stop;
 Phase 9 external reliability experiments need a new user instruction.
+
+## Phase 9 — bounded external reliability experiment (complete)
+
+Evaluated one fixed ten-feature ball-validity classifier with match-separated sigmoid
+calibration and reliability gating. Reused the verified Phase 5 tree/TCN folds;
+fitted validity on two other training games and calibrated on the third. No competition
+data, video or already-open final external matches entered the experiment. V1's
+frozen source, weights and CSV remain unchanged.
+
+Ten conditions and five fixed seeds across four matches yielded 200 comparison cells,
+including repeated clean inputs (184 distinct views). Mean spellF1 improved from
+0.483609 to 0.489890, with four match wins. Targeted sustained-error gain was +0.024778;
+independent-camera gain was +0.006062. The 0.006281 overall gain missed the predeclared
+0.01 requirement. All other adoption guards passed. Retain v1 and skip development;
+no tuning followed these results. These are reused training-match CV stress scores,
+not independent confirmation or a target ranking estimate.
+
+Repaired a protocol-write race in the parallel scheduler, preserving original/repaired
+execution records without changing experimental settings or model/run source hashes.
+Both full suites passed 92 tests. Independent saved-prediction rescoring at every
+official IoU, baseline clean-fold replay, artifact/source integrity and aggregate
+arithmetic all passed. The technical document records the rejected prototype; its
+local upload copy/manifest were refreshed with unchanged candidate CSV/handoff bytes.
+
+See [Phase 9 report](PHASE9_RELIABILITY.md), [protocol](PHASE9_PROTOCOL.md) and
+[aggregate results](phase9_results.json). Eligibility remains unresolved; no organizer
+message or form submission was sent. After this phase's GitHub push, stop. Phase 10
+is final delivery closure on v1 and needs the participant's next instruction.

@@ -1,0 +1,2891 @@
+{
+  "settings": {
+    "schema": 1,
+    "train_seeds": [
+      3101,
+      3203
+    ],
+    "evaluation_seeds": [
+      4101,
+      4201,
+      4301,
+      4409,
+      4507
+    ],
+    "training_scenarios": [
+      "clean",
+      "moderate",
+      "severe",
+      "sustained"
+    ],
+    "evaluation_scenarios": [
+      "clean",
+      "moderate",
+      "severe",
+      "structured",
+      "sustained",
+      "outage_2",
+      "outage_8",
+      "outage_20",
+      "camera_independent",
+      "camera_ball"
+    ],
+    "seed_formula": "base + 100000*match_index + 1000*half; development match_index=100",
+    "training_stride": 25,
+    "validity_error_metres": 2.0,
+    "false_tracks_per_minute": 6,
+    "false_track_seconds": [
+      2,
+      8
+    ],
+    "false_offset_metres": [
+      10,
+      30
+    ],
+    "outages_per_minute": 3,
+    "camera_blocks_seconds": 8,
+    "camera_half_width_metres": 25,
+    "camera_duplicate_slots_per_team": 2,
+    "calibration": "last training match only; remaining training matches fit HGB; sigmoid logit calibration C=1",
+    "classifier": {
+      "max_iter": 80,
+      "max_leaf_nodes": 7,
+      "min_samples_leaf": 80,
+      "l2_regularization": 1,
+      "early_stopping": false,
+      "random_state": 2026
+    },
+    "fusion": "q_new=min(q_original, calibrated_validity); otherwise frozen v1",
+    "gates": {
+      "mean_gain": 0.01,
+      "winning_matches": 3,
+      "max_match_loss": 0.01,
+      "max_condition_loss": 0.01,
+      "max_long_recall_loss": 0.01,
+      "sustained_gain_strictly_positive": true,
+      "independent_camera_gain_strictly_positive": true
+    },
+    "development_rule": "one fixed comparison only if CV gates pass; same gain and regression guards except fold-win count",
+    "retune_after_results": false,
+    "allow_target_or_final_holdouts": false
+  },
+  "selection": {
+    "means": {
+      "v1": 0.48360917123582026,
+      "challenger": 0.48989015733473207,
+      "v1_no_motion": 0.4649649707480079,
+      "challenger_no_motion": 0.4669701323725151
+    },
+    "match_differences": {
+      "J03WMX": 0.00500074586842858,
+      "J03WN1": 0.0019114082607854521,
+      "J03WOH": 0.010631747672472436,
+      "J03WOY": 0.0075800425939608895
+    },
+    "condition_differences": {
+      "clean": 0.007905619502212802,
+      "moderate": 0.00132684822312501,
+      "severe": 0.0002621822565258003,
+      "structured": 0.00028191128309545954,
+      "sustained": 0.02477763352655854,
+      "outage_2": 0.006862842027310134,
+      "outage_8": 0.004292630274396192,
+      "outage_20": 0.001580785416221142,
+      "camera_independent": 0.006061814393197196,
+      "camera_ball": 0.009457594086476284
+    },
+    "long_recall_difference": 0.003541666666666665,
+    "gates": {
+      "mean_gain": false,
+      "winning_matches": true,
+      "match_guard": true,
+      "condition_guard": true,
+      "long_recall_guard": true,
+      "sustained": true,
+      "independent_camera": true
+    },
+    "accepted": false,
+    "recommendation": "retain_v1"
+  },
+  "overall": {
+    "v1": {
+      "spell_f1_mean": 0.48360917123582026,
+      "macro_f1": 0.8555905924172013,
+      "alive_dead_f1": 0.9413316212104152,
+      "n_pred_spells": 387.79,
+      "fragmentation": 0.9049494560403276,
+      "false_d_runs_inside_true_possessions": 157.345,
+      "spell_f1_per_iou": {
+        "0.3": 0.622380690340307,
+        "0.4": 0.5637680075146999,
+        "0.5": 0.4887154178594797,
+        "0.6": 0.41287641665647185,
+        "0.7": 0.3303053238081428
+      },
+      "duration_recall": {
+        "short": {
+          "recall": 0.17063333333333333,
+          "repeated_support": 30000,
+          "repeated_hits": 5119
+        },
+        "long": {
+          "recall": 0.8090625,
+          "repeated_support": 9600,
+          "repeated_hits": 7767
+        }
+      },
+      "transition_timing": {
+        "turnover": {
+          "true": 72350,
+          "predicted": 51733,
+          "matched": 25287,
+          "absolute_latency_sum_frames": 214192,
+          "signed_latency_sum_frames": -25584,
+          "mean_absolute_latency_seconds": 0.33881757424763714
+        },
+        "restart": {
+          "true": 20850,
+          "predicted": 25479,
+          "matched": 15466,
+          "absolute_latency_sum_frames": 45749,
+          "signed_latency_sum_frames": 1019,
+          "mean_absolute_latency_seconds": 0.11832147937411096
+        }
+      }
+    },
+    "challenger": {
+      "spell_f1_mean": 0.48989015733473207,
+      "macro_f1": 0.8569392866615305,
+      "alive_dead_f1": 0.9410741793928323,
+      "n_pred_spells": 377.53,
+      "fragmentation": 0.8866530190467798,
+      "false_d_runs_inside_true_possessions": 157.59,
+      "spell_f1_per_iou": {
+        "0.3": 0.6273754479161512,
+        "0.4": 0.5703636699669986,
+        "0.5": 0.49541736743895476,
+        "0.6": 0.4202432532870497,
+        "0.7": 0.336051048064506
+      },
+      "duration_recall": {
+        "short": {
+          "recall": 0.16943333333333332,
+          "repeated_support": 30000,
+          "repeated_hits": 5083
+        },
+        "long": {
+          "recall": 0.8126041666666667,
+          "repeated_support": 9600,
+          "repeated_hits": 7801
+        }
+      },
+      "transition_timing": {
+        "turnover": {
+          "true": 72350,
+          "predicted": 49669,
+          "matched": 25094,
+          "absolute_latency_sum_frames": 212932,
+          "signed_latency_sum_frames": -20864,
+          "mean_absolute_latency_seconds": 0.33941499960149835
+        },
+        "restart": {
+          "true": 20850,
+          "predicted": 25491,
+          "matched": 15502,
+          "absolute_latency_sum_frames": 45928,
+          "signed_latency_sum_frames": 1110,
+          "mean_absolute_latency_seconds": 0.11850857953812412
+        }
+      }
+    },
+    "v1_no_motion": {
+      "spell_f1_mean": 0.4649649707480079,
+      "macro_f1": 0.8482483724709136,
+      "alive_dead_f1": 0.9403176371645097,
+      "n_pred_spells": 374.83,
+      "fragmentation": 0.8827100598431283,
+      "false_d_runs_inside_true_possessions": 159.06,
+      "spell_f1_per_iou": {
+        "0.3": 0.604215464933915,
+        "0.4": 0.5441314288939089,
+        "0.5": 0.469077489657403,
+        "0.6": 0.3937937171636524,
+        "0.7": 0.3136067530911607
+      },
+      "duration_recall": {
+        "short": {
+          "recall": 0.16013333333333332,
+          "repeated_support": 30000,
+          "repeated_hits": 4804
+        },
+        "long": {
+          "recall": 0.8047916666666667,
+          "repeated_support": 9600,
+          "repeated_hits": 7726
+        }
+      },
+      "transition_timing": {
+        "turnover": {
+          "true": 72350,
+          "predicted": 49093,
+          "matched": 23070,
+          "absolute_latency_sum_frames": 191076,
+          "signed_latency_sum_frames": -30298,
+          "mean_absolute_latency_seconds": 0.3312977893368011
+        },
+        "restart": {
+          "true": 20850,
+          "predicted": 25527,
+          "matched": 15230,
+          "absolute_latency_sum_frames": 44536,
+          "signed_latency_sum_frames": 1942,
+          "mean_absolute_latency_seconds": 0.11696913985554826
+        }
+      }
+    },
+    "challenger_no_motion": {
+      "spell_f1_mean": 0.4669701323725151,
+      "macro_f1": 0.8483840489332819,
+      "alive_dead_f1": 0.940045451581311,
+      "n_pred_spells": 370.08,
+      "fragmentation": 0.8745025158932122,
+      "false_d_runs_inside_true_possessions": 159.43,
+      "spell_f1_per_iou": {
+        "0.3": 0.6063066666092554,
+        "0.4": 0.5463031228276712,
+        "0.5": 0.4709594504649977,
+        "0.6": 0.39568092399167015,
+        "0.7": 0.31560049796898115
+      },
+      "duration_recall": {
+        "short": {
+          "recall": 0.16,
+          "repeated_support": 30000,
+          "repeated_hits": 4800
+        },
+        "long": {
+          "recall": 0.8054166666666667,
+          "repeated_support": 9600,
+          "repeated_hits": 7732
+        }
+      },
+      "transition_timing": {
+        "turnover": {
+          "true": 72350,
+          "predicted": 48118,
+          "matched": 22902,
+          "absolute_latency_sum_frames": 188629,
+          "signed_latency_sum_frames": -29403,
+          "mean_absolute_latency_seconds": 0.32945419614007515
+        },
+        "restart": {
+          "true": 20850,
+          "predicted": 25552,
+          "matched": 15242,
+          "absolute_latency_sum_frames": 44581,
+          "signed_latency_sum_frames": 1971,
+          "mean_absolute_latency_seconds": 0.11699514499409526
+        }
+      }
+    }
+  },
+  "by_condition": {
+    "clean": {
+      "v1": {
+        "spell_f1_mean": 0.5854606643140917,
+        "macro_f1": 0.9156744083084767,
+        "alive_dead_f1": 0.9935962028915395,
+        "n_pred_spells": 409.0,
+        "fragmentation": 0.9063793333425043,
+        "false_d_runs_inside_true_possessions": 75.5,
+        "spell_f1_per_iou": {
+          "0.3": 0.7012093688114771,
+          "0.4": 0.6596313269779734,
+          "0.5": 0.5945879748546337,
+          "0.6": 0.5272107033592837,
+          "0.7": 0.4446639475670901
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.25333333333333335,
+            "repeated_support": 3000,
+            "repeated_hits": 760
+          },
+          "long": {
+            "recall": 0.9427083333333334,
+            "repeated_support": 960,
+            "repeated_hits": 905
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 6000,
+            "matched": 3320,
+            "absolute_latency_sum_frames": 24960,
+            "signed_latency_sum_frames": -5530,
+            "mean_absolute_latency_seconds": 0.3007228915662651
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2145,
+            "matched": 1995,
+            "absolute_latency_sum_frames": 2265,
+            "signed_latency_sum_frames": -1145,
+            "mean_absolute_latency_seconds": 0.04541353383458647
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.5933662838163045,
+        "macro_f1": 0.9167787086272801,
+        "alive_dead_f1": 0.9935805213227527,
+        "n_pred_spells": 398.25,
+        "fragmentation": 0.8868697186926928,
+        "false_d_runs_inside_true_possessions": 75.5,
+        "spell_f1_per_iou": {
+          "0.3": 0.7073783918721054,
+          "0.4": 0.6671548119220492,
+          "0.5": 0.6030455411884816,
+          "0.6": 0.5373823964469093,
+          "0.7": 0.45187027765197707
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.25333333333333335,
+            "repeated_support": 3000,
+            "repeated_hits": 760
+          },
+          "long": {
+            "recall": 0.9427083333333334,
+            "repeated_support": 960,
+            "repeated_hits": 905
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5785,
+            "matched": 3300,
+            "absolute_latency_sum_frames": 24905,
+            "signed_latency_sum_frames": -4205,
+            "mean_absolute_latency_seconds": 0.30187878787878786
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2145,
+            "matched": 2000,
+            "absolute_latency_sum_frames": 2275,
+            "signed_latency_sum_frames": -1155,
+            "mean_absolute_latency_seconds": 0.0455
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.5851303112400073,
+        "macro_f1": 0.9155836086489609,
+        "alive_dead_f1": 0.9935897139683704,
+        "n_pred_spells": 409.25,
+        "fragmentation": 0.9069320295234957,
+        "false_d_runs_inside_true_possessions": 76.0,
+        "spell_f1_per_iou": {
+          "0.3": 0.7003701037998187,
+          "0.4": 0.6593899615799709,
+          "0.5": 0.5943589909853161,
+          "0.6": 0.5275803154897659,
+          "0.7": 0.44395218434516526
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.25333333333333335,
+            "repeated_support": 3000,
+            "repeated_hits": 760
+          },
+          "long": {
+            "recall": 0.9427083333333334,
+            "repeated_support": 960,
+            "repeated_hits": 905
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 6005,
+            "matched": 3315,
+            "absolute_latency_sum_frames": 24835,
+            "signed_latency_sum_frames": -5415,
+            "mean_absolute_latency_seconds": 0.2996681749622926
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2145,
+            "matched": 1980,
+            "absolute_latency_sum_frames": 2255,
+            "signed_latency_sum_frames": -1035,
+            "mean_absolute_latency_seconds": 0.04555555555555555
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.5868079893254242,
+        "macro_f1": 0.9160100195083791,
+        "alive_dead_f1": 0.9935814328732802,
+        "n_pred_spells": 405.5,
+        "fragmentation": 0.900275868054044,
+        "false_d_runs_inside_true_possessions": 76.0,
+        "spell_f1_per_iou": {
+          "0.3": 0.7034880786664457,
+          "0.4": 0.6617042849578458,
+          "0.5": 0.5947307637855612,
+          "0.6": 0.5282317105236681,
+          "0.7": 0.4458851086935994
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.25333333333333335,
+            "repeated_support": 3000,
+            "repeated_hits": 760
+          },
+          "long": {
+            "recall": 0.9427083333333334,
+            "repeated_support": 960,
+            "repeated_hits": 905
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5930,
+            "matched": 3305,
+            "absolute_latency_sum_frames": 24635,
+            "signed_latency_sum_frames": -5125,
+            "mean_absolute_latency_seconds": 0.2981543116490166
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2145,
+            "matched": 1985,
+            "absolute_latency_sum_frames": 2265,
+            "signed_latency_sum_frames": -1045,
+            "mean_absolute_latency_seconds": 0.04564231738035265
+          }
+        }
+      }
+    },
+    "moderate": {
+      "v1": {
+        "spell_f1_mean": 0.5478471772853521,
+        "macro_f1": 0.8977031721348381,
+        "alive_dead_f1": 0.9783134380405348,
+        "n_pred_spells": 398.5,
+        "fragmentation": 0.9034626873001137,
+        "false_d_runs_inside_true_possessions": 101.85,
+        "spell_f1_per_iou": {
+          "0.3": 0.6760707309656939,
+          "0.4": 0.6289018360546312,
+          "0.5": 0.5575748712771043,
+          "0.6": 0.48165946102645324,
+          "0.7": 0.3950289871028779
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.22066666666666668,
+            "repeated_support": 3000,
+            "repeated_hits": 662
+          },
+          "long": {
+            "recall": 0.9104166666666667,
+            "repeated_support": 960,
+            "repeated_hits": 874
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5606,
+            "matched": 2994,
+            "absolute_latency_sum_frames": 23734,
+            "signed_latency_sum_frames": -3948,
+            "mean_absolute_latency_seconds": 0.3170875083500334
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2329,
+            "matched": 1803,
+            "absolute_latency_sum_frames": 4907,
+            "signed_latency_sum_frames": -1579,
+            "mean_absolute_latency_seconds": 0.10886300610094286
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.5491740255084772,
+        "macro_f1": 0.8978698856397649,
+        "alive_dead_f1": 0.9783097025985192,
+        "n_pred_spells": 396.7,
+        "fragmentation": 0.9002790915681432,
+        "false_d_runs_inside_true_possessions": 101.9,
+        "spell_f1_per_iou": {
+          "0.3": 0.6767947405357667,
+          "0.4": 0.6298166265849222,
+          "0.5": 0.5590324376156077,
+          "0.6": 0.4835686017476969,
+          "0.7": 0.39665772105839214
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.21966666666666668,
+            "repeated_support": 3000,
+            "repeated_hits": 659
+          },
+          "long": {
+            "recall": 0.9104166666666667,
+            "repeated_support": 960,
+            "repeated_hits": 874
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5570,
+            "matched": 2991,
+            "absolute_latency_sum_frames": 23695,
+            "signed_latency_sum_frames": -3817,
+            "mean_absolute_latency_seconds": 0.3168839852892009
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2329,
+            "matched": 1803,
+            "absolute_latency_sum_frames": 4905,
+            "signed_latency_sum_frames": -1573,
+            "mean_absolute_latency_seconds": 0.10881863560732112
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.5395272382725715,
+        "macro_f1": 0.8942265469685664,
+        "alive_dead_f1": 0.9777483158386845,
+        "n_pred_spells": 394.2,
+        "fragmentation": 0.8980293840238117,
+        "false_d_runs_inside_true_possessions": 104.1,
+        "spell_f1_per_iou": {
+          "0.3": 0.6698543371294332,
+          "0.4": 0.620982413373174,
+          "0.5": 0.5478374758639623,
+          "0.6": 0.47243814562354614,
+          "0.7": 0.3865238193727422
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.21433333333333332,
+            "repeated_support": 3000,
+            "repeated_hits": 643
+          },
+          "long": {
+            "recall": 0.9052083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 869
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5500,
+            "matched": 2872,
+            "absolute_latency_sum_frames": 22388,
+            "signed_latency_sum_frames": -4328,
+            "mean_absolute_latency_seconds": 0.3118105849582173
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2349,
+            "matched": 1780,
+            "absolute_latency_sum_frames": 4690,
+            "signed_latency_sum_frames": -1468,
+            "mean_absolute_latency_seconds": 0.10539325842696629
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.5398139399479202,
+        "macro_f1": 0.8942167097980059,
+        "alive_dead_f1": 0.9777471763421506,
+        "n_pred_spells": 393.15,
+        "fragmentation": 0.8962159118962404,
+        "false_d_runs_inside_true_possessions": 104.2,
+        "spell_f1_per_iou": {
+          "0.3": 0.6700854092320339,
+          "0.4": 0.6211333885343333,
+          "0.5": 0.5483001478450023,
+          "0.6": 0.47278433423359223,
+          "0.7": 0.38676641989463845
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.21433333333333332,
+            "repeated_support": 3000,
+            "repeated_hits": 643
+          },
+          "long": {
+            "recall": 0.9052083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 869
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5479,
+            "matched": 2865,
+            "absolute_latency_sum_frames": 22300,
+            "signed_latency_sum_frames": -4268,
+            "mean_absolute_latency_seconds": 0.3113438045375218
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2349,
+            "matched": 1781,
+            "absolute_latency_sum_frames": 4684,
+            "signed_latency_sum_frames": -1458,
+            "mean_absolute_latency_seconds": 0.10519932622122402
+          }
+        }
+      }
+    },
+    "severe": {
+      "v1": {
+        "spell_f1_mean": 0.4722082464439909,
+        "macro_f1": 0.851535280905942,
+        "alive_dead_f1": 0.9415570118754472,
+        "n_pred_spells": 358.15,
+        "fragmentation": 0.8280249476764485,
+        "false_d_runs_inside_true_possessions": 123.35,
+        "spell_f1_per_iou": {
+          "0.3": 0.6154104171364102,
+          "0.4": 0.5570764999866789,
+          "0.5": 0.47952542868047576,
+          "0.6": 0.39896788863967014,
+          "0.7": 0.3100609977767199
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.11866666666666667,
+            "repeated_support": 3000,
+            "repeated_hits": 356
+          },
+          "long": {
+            "recall": 0.8208333333333333,
+            "repeated_support": 960,
+            "repeated_hits": 788
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4862,
+            "matched": 2360,
+            "absolute_latency_sum_frames": 23114,
+            "signed_latency_sum_frames": -540,
+            "mean_absolute_latency_seconds": 0.3917627118644068
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2266,
+            "matched": 1309,
+            "absolute_latency_sum_frames": 9176,
+            "signed_latency_sum_frames": 184,
+            "mean_absolute_latency_seconds": 0.2803972498090145
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.4724704287005167,
+        "macro_f1": 0.8515336876016967,
+        "alive_dead_f1": 0.9415566851593894,
+        "n_pred_spells": 357.7,
+        "fragmentation": 0.8272016354434687,
+        "false_d_runs_inside_true_possessions": 123.35,
+        "spell_f1_per_iou": {
+          "0.3": 0.6155322455267688,
+          "0.4": 0.5576754491430223,
+          "0.5": 0.47960753032411585,
+          "0.6": 0.3992486159980563,
+          "0.7": 0.31028830251062023
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.11833333333333333,
+            "repeated_support": 3000,
+            "repeated_hits": 355
+          },
+          "long": {
+            "recall": 0.8208333333333333,
+            "repeated_support": 960,
+            "repeated_hits": 788
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4853,
+            "matched": 2359,
+            "absolute_latency_sum_frames": 23131,
+            "signed_latency_sum_frames": -533,
+            "mean_absolute_latency_seconds": 0.39221704111911826
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2266,
+            "matched": 1309,
+            "absolute_latency_sum_frames": 9177,
+            "signed_latency_sum_frames": 183,
+            "mean_absolute_latency_seconds": 0.28042780748663104
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.40832346337140113,
+        "macro_f1": 0.8313751640422264,
+        "alive_dead_f1": 0.9417188747870998,
+        "n_pred_spells": 314.0,
+        "fragmentation": 0.7502416864388575,
+        "false_d_runs_inside_true_possessions": 125.55,
+        "spell_f1_per_iou": {
+          "0.3": 0.5572575698102106,
+          "0.4": 0.4891948095609446,
+          "0.5": 0.4114918453791926,
+          "0.6": 0.3314245934427046,
+          "0.7": 0.25224849866395277
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.08733333333333333,
+            "repeated_support": 3000,
+            "repeated_hits": 262
+          },
+          "long": {
+            "recall": 0.8052083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 773
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 3983,
+            "matched": 1658,
+            "absolute_latency_sum_frames": 16014,
+            "signed_latency_sum_frames": -2262,
+            "mean_absolute_latency_seconds": 0.38634499396863686
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2262,
+            "matched": 1267,
+            "absolute_latency_sum_frames": 8971,
+            "signed_latency_sum_frames": 479,
+            "mean_absolute_latency_seconds": 0.2832202052091555
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.40835161450771357,
+        "macro_f1": 0.8314022479524728,
+        "alive_dead_f1": 0.9417184511769964,
+        "n_pred_spells": 313.9,
+        "fragmentation": 0.7500432737404448,
+        "false_d_runs_inside_true_possessions": 125.55,
+        "spell_f1_per_iou": {
+          "0.3": 0.557054534309092,
+          "0.4": 0.489265430604812,
+          "0.5": 0.41155564507223186,
+          "0.6": 0.33159223327164833,
+          "0.7": 0.2522902292807835
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.08733333333333333,
+            "repeated_support": 3000,
+            "repeated_hits": 262
+          },
+          "long": {
+            "recall": 0.8052083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 773
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 3981,
+            "matched": 1658,
+            "absolute_latency_sum_frames": 16023,
+            "signed_latency_sum_frames": -2249,
+            "mean_absolute_latency_seconds": 0.386562123039807
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2262,
+            "matched": 1267,
+            "absolute_latency_sum_frames": 8969,
+            "signed_latency_sum_frames": 481,
+            "mean_absolute_latency_seconds": 0.2831570639305446
+          }
+        }
+      }
+    },
+    "structured": {
+      "v1": {
+        "spell_f1_mean": 0.46263927646081077,
+        "macro_f1": 0.8483244705845282,
+        "alive_dead_f1": 0.9394215130075786,
+        "n_pred_spells": 357.75,
+        "fragmentation": 0.82911253019552,
+        "false_d_runs_inside_true_possessions": 125.65,
+        "spell_f1_per_iou": {
+          "0.3": 0.6080524701033827,
+          "0.4": 0.5471444764911954,
+          "0.5": 0.4700440345485511,
+          "0.6": 0.3887355193306677,
+          "0.7": 0.2992198818302569
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.10866666666666666,
+            "repeated_support": 3000,
+            "repeated_hits": 326
+          },
+          "long": {
+            "recall": 0.8239583333333333,
+            "repeated_support": 960,
+            "repeated_hits": 791
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4831,
+            "matched": 2311,
+            "absolute_latency_sum_frames": 22909,
+            "signed_latency_sum_frames": 331,
+            "mean_absolute_latency_seconds": 0.3965209865858935
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2289,
+            "matched": 1281,
+            "absolute_latency_sum_frames": 9150,
+            "signed_latency_sum_frames": 562,
+            "mean_absolute_latency_seconds": 0.28571428571428575
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.4629211877439062,
+        "macro_f1": 0.8483786023025282,
+        "alive_dead_f1": 0.9394196280380653,
+        "n_pred_spells": 357.45,
+        "fragmentation": 0.8285528383491831,
+        "false_d_runs_inside_true_possessions": 125.7,
+        "spell_f1_per_iou": {
+          "0.3": 0.6081820294287505,
+          "0.4": 0.5475046191593018,
+          "0.5": 0.4702536367135095,
+          "0.6": 0.38917880543742356,
+          "0.7": 0.2994868479805456
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.10866666666666666,
+            "repeated_support": 3000,
+            "repeated_hits": 326
+          },
+          "long": {
+            "recall": 0.8239583333333333,
+            "repeated_support": 960,
+            "repeated_hits": 791
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4825,
+            "matched": 2310,
+            "absolute_latency_sum_frames": 22905,
+            "signed_latency_sum_frames": 323,
+            "mean_absolute_latency_seconds": 0.39662337662337666
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2289,
+            "matched": 1281,
+            "absolute_latency_sum_frames": 9156,
+            "signed_latency_sum_frames": 566,
+            "mean_absolute_latency_seconds": 0.28590163934426227
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.39907486795924874,
+        "macro_f1": 0.8274188470835977,
+        "alive_dead_f1": 0.939195206525118,
+        "n_pred_spells": 318.05,
+        "fragmentation": 0.7600690966286019,
+        "false_d_runs_inside_true_possessions": 128.3,
+        "spell_f1_per_iou": {
+          "0.3": 0.5489305056590488,
+          "0.4": 0.48092237645339575,
+          "0.5": 0.40235153818110414,
+          "0.6": 0.3211995797162117,
+          "0.7": 0.24197033978648355
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.081,
+            "repeated_support": 3000,
+            "repeated_hits": 243
+          },
+          "long": {
+            "recall": 0.8020833333333334,
+            "repeated_support": 960,
+            "repeated_hits": 770
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4031,
+            "matched": 1621,
+            "absolute_latency_sum_frames": 15908,
+            "signed_latency_sum_frames": -1690,
+            "mean_absolute_latency_seconds": 0.39254780999383093
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2295,
+            "matched": 1238,
+            "absolute_latency_sum_frames": 8932,
+            "signed_latency_sum_frames": 802,
+            "mean_absolute_latency_seconds": 0.28859450726978997
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.3991000127860554,
+        "macro_f1": 0.8274490874285496,
+        "alive_dead_f1": 0.9391945007304467,
+        "n_pred_spells": 317.95,
+        "fragmentation": 0.7598706839301892,
+        "false_d_runs_inside_true_possessions": 128.3,
+        "spell_f1_per_iou": {
+          "0.3": 0.5487249242034673,
+          "0.4": 0.48099157808509735,
+          "0.5": 0.40241183667890257,
+          "0.6": 0.3213641538890951,
+          "0.7": 0.24200757107371484
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.081,
+            "repeated_support": 3000,
+            "repeated_hits": 243
+          },
+          "long": {
+            "recall": 0.8020833333333334,
+            "repeated_support": 960,
+            "repeated_hits": 770
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4029,
+            "matched": 1621,
+            "absolute_latency_sum_frames": 15916,
+            "signed_latency_sum_frames": -1676,
+            "mean_absolute_latency_seconds": 0.39274521900061693
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2295,
+            "matched": 1238,
+            "absolute_latency_sum_frames": 8931,
+            "signed_latency_sum_frames": 803,
+            "mean_absolute_latency_seconds": 0.28856219709208397
+          }
+        }
+      }
+    },
+    "sustained": {
+      "v1": {
+        "spell_f1_mean": 0.42507686193571625,
+        "macro_f1": 0.8373518068677883,
+        "alive_dead_f1": 0.9413356349939086,
+        "n_pred_spells": 469.7,
+        "fragmentation": 1.105745006130493,
+        "false_d_runs_inside_true_possessions": 184.25,
+        "spell_f1_per_iou": {
+          "0.3": 0.5833224389466604,
+          "0.4": 0.5120209376321487,
+          "0.5": 0.4284673254888719,
+          "0.6": 0.34232634975215886,
+          "0.7": 0.2592472578587416
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.189,
+            "repeated_support": 3000,
+            "repeated_hits": 567
+          },
+          "long": {
+            "recall": 0.6791666666666667,
+            "repeated_support": 960,
+            "repeated_hits": 652
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 6148,
+            "matched": 2450,
+            "absolute_latency_sum_frames": 20258,
+            "signed_latency_sum_frames": -2766,
+            "mean_absolute_latency_seconds": 0.33074285714285717
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 3211,
+            "matched": 1678,
+            "absolute_latency_sum_frames": 4201,
+            "signed_latency_sum_frames": -141,
+            "mean_absolute_latency_seconds": 0.1001430274135876
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.4498544954622748,
+        "macro_f1": 0.845513999592123,
+        "alive_dead_f1": 0.9408355688071914,
+        "n_pred_spells": 443.7,
+        "fragmentation": 1.0608055739316085,
+        "false_d_runs_inside_true_possessions": 185.85,
+        "spell_f1_per_iou": {
+          "0.3": 0.6049011235220634,
+          "0.4": 0.5378886850129836,
+          "0.5": 0.4546607996043253,
+          "0.6": 0.37004900877935737,
+          "0.7": 0.2817728603926438
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.19,
+            "repeated_support": 3000,
+            "repeated_hits": 570
+          },
+          "long": {
+            "recall": 0.7083333333333334,
+            "repeated_support": 960,
+            "repeated_hits": 680
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5614,
+            "matched": 2471,
+            "absolute_latency_sum_frames": 20299,
+            "signed_latency_sum_frames": -2005,
+            "mean_absolute_latency_seconds": 0.32859571023876977
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 3225,
+            "matched": 1688,
+            "absolute_latency_sum_frames": 4219,
+            "signed_latency_sum_frames": -141,
+            "mean_absolute_latency_seconds": 0.09997630331753556
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.4228795881021393,
+        "macro_f1": 0.8358029877997388,
+        "alive_dead_f1": 0.9412414110799749,
+        "n_pred_spells": 470.0,
+        "fragmentation": 1.1063991447910984,
+        "false_d_runs_inside_true_possessions": 184.7,
+        "spell_f1_per_iou": {
+          "0.3": 0.5816322605695488,
+          "0.4": 0.5098497412412154,
+          "0.5": 0.42613494461507484,
+          "0.6": 0.340023538185571,
+          "0.7": 0.25675745589928667
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.186,
+            "repeated_support": 3000,
+            "repeated_hits": 558
+          },
+          "long": {
+            "recall": 0.678125,
+            "repeated_support": 960,
+            "repeated_hits": 651
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 6152,
+            "matched": 2426,
+            "absolute_latency_sum_frames": 20041,
+            "signed_latency_sum_frames": -2699,
+            "mean_absolute_latency_seconds": 0.33043693322341305
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 3213,
+            "matched": 1650,
+            "absolute_latency_sum_frames": 4118,
+            "signed_latency_sum_frames": -36,
+            "mean_absolute_latency_seconds": 0.09983030303030302
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.42832290823213476,
+        "macro_f1": 0.835733995627904,
+        "alive_dead_f1": 0.9400563804465873,
+        "n_pred_spells": 456.4,
+        "fragmentation": 1.0837920895308328,
+        "false_d_runs_inside_true_possessions": 186.75,
+        "spell_f1_per_iou": {
+          "0.3": 0.5871246769434755,
+          "0.4": 0.5158861141666204,
+          "0.5": 0.43190436417434463,
+          "0.6": 0.3453822872613955,
+          "0.7": 0.2613170986148376
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.185,
+            "repeated_support": 3000,
+            "repeated_hits": 555
+          },
+          "long": {
+            "recall": 0.6802083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 653
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5863,
+            "matched": 2379,
+            "absolute_latency_sum_frames": 19478,
+            "signed_latency_sum_frames": -2428,
+            "mean_absolute_latency_seconds": 0.32749894913829336
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 3230,
+            "matched": 1646,
+            "absolute_latency_sum_frames": 4099,
+            "signed_latency_sum_frames": -41,
+            "mean_absolute_latency_seconds": 0.09961117861482383
+          }
+        }
+      }
+    },
+    "outage_2": {
+      "v1": {
+        "spell_f1_mean": 0.5785887206716425,
+        "macro_f1": 0.9114863461653206,
+        "alive_dead_f1": 0.9901061011032837,
+        "n_pred_spells": 399.8,
+        "fragmentation": 0.8916772857737255,
+        "false_d_runs_inside_true_possessions": 88.2,
+        "spell_f1_per_iou": {
+          "0.3": 0.6990145060050944,
+          "0.4": 0.6533352975498289,
+          "0.5": 0.5903076620671059,
+          "0.6": 0.5177448681147323,
+          "0.7": 0.43254126962145084
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.237,
+            "repeated_support": 3000,
+            "repeated_hits": 711
+          },
+          "long": {
+            "recall": 0.9395833333333333,
+            "repeated_support": 960,
+            "repeated_hits": 902
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5799,
+            "matched": 3215,
+            "absolute_latency_sum_frames": 25181,
+            "signed_latency_sum_frames": -4281,
+            "mean_absolute_latency_seconds": 0.31329393468118194
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2163,
+            "matched": 1939,
+            "absolute_latency_sum_frames": 4414,
+            "signed_latency_sum_frames": 610,
+            "mean_absolute_latency_seconds": 0.09105724600309438
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.5854515626989526,
+        "macro_f1": 0.9124329229306722,
+        "alive_dead_f1": 0.990096000511867,
+        "n_pred_spells": 389.55,
+        "fragmentation": 0.8731281699141287,
+        "false_d_runs_inside_true_possessions": 88.2,
+        "spell_f1_per_iou": {
+          "0.3": 0.7045325435158214,
+          "0.4": 0.6604110662458799,
+          "0.5": 0.5971407350321809,
+          "0.6": 0.5272236611288941,
+          "0.7": 0.4379498075719866
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.23666666666666666,
+            "repeated_support": 3000,
+            "repeated_hits": 710
+          },
+          "long": {
+            "recall": 0.9395833333333333,
+            "repeated_support": 960,
+            "repeated_hits": 902
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5594,
+            "matched": 3198,
+            "absolute_latency_sum_frames": 25147,
+            "signed_latency_sum_frames": -3357,
+            "mean_absolute_latency_seconds": 0.31453408380237646
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2163,
+            "matched": 1942,
+            "absolute_latency_sum_frames": 4420,
+            "signed_latency_sum_frames": 604,
+            "mean_absolute_latency_seconds": 0.09104016477857879
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.5723755697548548,
+        "macro_f1": 0.9096911477681863,
+        "alive_dead_f1": 0.9900974980900055,
+        "n_pred_spells": 396.35,
+        "fragmentation": 0.8861019309513661,
+        "false_d_runs_inside_true_possessions": 89.0,
+        "spell_f1_per_iou": {
+          "0.3": 0.6935048991258987,
+          "0.4": 0.6477721095567249,
+          "0.5": 0.5835437117183186,
+          "0.6": 0.511428521954885,
+          "0.7": 0.42562860641844713
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.22766666666666666,
+            "repeated_support": 3000,
+            "repeated_hits": 683
+          },
+          "long": {
+            "recall": 0.9416666666666667,
+            "repeated_support": 960,
+            "repeated_hits": 904
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5726,
+            "matched": 3126,
+            "absolute_latency_sum_frames": 24386,
+            "signed_latency_sum_frames": -4590,
+            "mean_absolute_latency_seconds": 0.31204094689699297
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2167,
+            "matched": 1915,
+            "absolute_latency_sum_frames": 4232,
+            "signed_latency_sum_frames": 562,
+            "mean_absolute_latency_seconds": 0.08839686684073107
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.5747330107196386,
+        "macro_f1": 0.9101022869340516,
+        "alive_dead_f1": 0.9900914953061999,
+        "n_pred_spells": 392.35,
+        "fragmentation": 0.8790756971949628,
+        "false_d_runs_inside_true_possessions": 89.0,
+        "spell_f1_per_iou": {
+          "0.3": 0.6966784207018545,
+          "0.4": 0.6506971649115322,
+          "0.5": 0.585062287759742,
+          "0.6": 0.513401767779726,
+          "0.7": 0.42782541244533834
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.229,
+            "repeated_support": 3000,
+            "repeated_hits": 687
+          },
+          "long": {
+            "recall": 0.9427083333333334,
+            "repeated_support": 960,
+            "repeated_hits": 905
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5646,
+            "matched": 3115,
+            "absolute_latency_sum_frames": 24187,
+            "signed_latency_sum_frames": -4377,
+            "mean_absolute_latency_seconds": 0.31058747993579455
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2167,
+            "matched": 1918,
+            "absolute_latency_sum_frames": 4216,
+            "signed_latency_sum_frames": 530,
+            "mean_absolute_latency_seconds": 0.08792492179353494
+          }
+        }
+      }
+    },
+    "outage_8": {
+      "v1": {
+        "spell_f1_mean": 0.5072019746491263,
+        "macro_f1": 0.8582432309362595,
+        "alive_dead_f1": 0.9320724584120412,
+        "n_pred_spells": 367.2,
+        "fragmentation": 0.8778484331420465,
+        "false_d_runs_inside_true_possessions": 185.8,
+        "spell_f1_per_iou": {
+          "0.3": 0.6427200971613144,
+          "0.4": 0.5852764662504211,
+          "0.5": 0.5138981315082799,
+          "0.6": 0.4395346698304178,
+          "0.7": 0.3545805084951987
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.18333333333333332,
+            "repeated_support": 3000,
+            "repeated_hits": 550
+          },
+          "long": {
+            "recall": 0.8270833333333333,
+            "repeated_support": 960,
+            "repeated_hits": 794
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4660,
+            "matched": 2567,
+            "absolute_latency_sum_frames": 20747,
+            "signed_latency_sum_frames": -3451,
+            "mean_absolute_latency_seconds": 0.32328788469029995
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2650,
+            "matched": 1449,
+            "absolute_latency_sum_frames": 3383,
+            "signed_latency_sum_frames": 215,
+            "mean_absolute_latency_seconds": 0.09338854382332644
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.5114946049235225,
+        "macro_f1": 0.8589204066480913,
+        "alive_dead_f1": 0.9320492254743084,
+        "n_pred_spells": 359.2,
+        "fragmentation": 0.863414886287311,
+        "false_d_runs_inside_true_possessions": 185.85,
+        "spell_f1_per_iou": {
+          "0.3": 0.6461767837532231,
+          "0.4": 0.59077210595071,
+          "0.5": 0.517960485341243,
+          "0.6": 0.444815091853893,
+          "0.7": 0.3577485577185436
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.18033333333333335,
+            "repeated_support": 3000,
+            "repeated_hits": 541
+          },
+          "long": {
+            "recall": 0.828125,
+            "repeated_support": 960,
+            "repeated_hits": 795
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4499,
+            "matched": 2545,
+            "absolute_latency_sum_frames": 20535,
+            "signed_latency_sum_frames": -2701,
+            "mean_absolute_latency_seconds": 0.3227504911591355
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2651,
+            "matched": 1452,
+            "absolute_latency_sum_frames": 3399,
+            "signed_latency_sum_frames": 199,
+            "mean_absolute_latency_seconds": 0.09363636363636363
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.4911035657111561,
+        "macro_f1": 0.8497865228535024,
+        "alive_dead_f1": 0.9296923055391652,
+        "n_pred_spells": 353.85,
+        "fragmentation": 0.8568045771822719,
+        "false_d_runs_inside_true_possessions": 188.95,
+        "spell_f1_per_iou": {
+          "0.3": 0.6268303352963003,
+          "0.4": 0.569233495552476,
+          "0.5": 0.49652232946546093,
+          "0.6": 0.4225264940691217,
+          "0.7": 0.3404051741724218
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.17133333333333334,
+            "repeated_support": 3000,
+            "repeated_hits": 514
+          },
+          "long": {
+            "recall": 0.8302083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 797
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4367,
+            "matched": 2336,
+            "absolute_latency_sum_frames": 18193,
+            "signed_latency_sum_frames": -3759,
+            "mean_absolute_latency_seconds": 0.31152397260273973
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2676,
+            "matched": 1424,
+            "absolute_latency_sum_frames": 3210,
+            "signed_latency_sum_frames": 204,
+            "mean_absolute_latency_seconds": 0.0901685393258427
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.4926580522807261,
+        "macro_f1": 0.8501265457449678,
+        "alive_dead_f1": 0.9296683129028752,
+        "n_pred_spells": 350.8,
+        "fragmentation": 0.8515424220707667,
+        "false_d_runs_inside_true_possessions": 189.0,
+        "spell_f1_per_iou": {
+          "0.3": 0.6290982441961825,
+          "0.4": 0.5712791244181912,
+          "0.5": 0.496894297384,
+          "0.6": 0.4236840473799998,
+          "0.7": 0.3423345480252574
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.17166666666666666,
+            "repeated_support": 3000,
+            "repeated_hits": 515
+          },
+          "long": {
+            "recall": 0.8302083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 797
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4305,
+            "matched": 2327,
+            "absolute_latency_sum_frames": 18017,
+            "signed_latency_sum_frames": -3573,
+            "mean_absolute_latency_seconds": 0.3097034808766652
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2677,
+            "matched": 1427,
+            "absolute_latency_sum_frames": 3217,
+            "signed_latency_sum_frames": 199,
+            "mean_absolute_latency_seconds": 0.0901751927119832
+          }
+        }
+      }
+    },
+    "outage_20": {
+      "v1": {
+        "spell_f1_mean": 0.39921032739132484,
+        "macro_f1": 0.7631733832505015,
+        "alive_dead_f1": 0.8205512193834045,
+        "n_pred_spells": 294.2,
+        "fragmentation": 0.7584102572812854,
+        "false_d_runs_inside_true_possessions": 300.0,
+        "spell_f1_per_iou": {
+          "0.3": 0.5407589853985747,
+          "0.4": 0.4734551083005754,
+          "0.5": 0.3985556428036243,
+          "0.6": 0.32837740476395466,
+          "0.7": 0.254904495689895
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.107,
+            "repeated_support": 3000,
+            "repeated_hits": 321
+          },
+          "long": {
+            "recall": 0.653125,
+            "repeated_support": 960,
+            "repeated_hits": 627
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 3120,
+            "matched": 1655,
+            "absolute_latency_sum_frames": 14753,
+            "signed_latency_sum_frames": -1565,
+            "mean_absolute_latency_seconds": 0.3565679758308157
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2730,
+            "matched": 848,
+            "absolute_latency_sum_frames": 2631,
+            "signed_latency_sum_frames": 983,
+            "mean_absolute_latency_seconds": 0.12410377358490565
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.400791112807546,
+        "macro_f1": 0.7636109644878122,
+        "alive_dead_f1": 0.8205308328996607,
+        "n_pred_spells": 289.6,
+        "fragmentation": 0.7501297003877052,
+        "false_d_runs_inside_true_possessions": 300.05,
+        "spell_f1_per_iou": {
+          "0.3": 0.5420608961459237,
+          "0.4": 0.47542117092391567,
+          "0.5": 0.3990693856420794,
+          "0.6": 0.3308202391169921,
+          "0.7": 0.2565838722088187
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.10466666666666667,
+            "repeated_support": 3000,
+            "repeated_hits": 314
+          },
+          "long": {
+            "recall": 0.6520833333333333,
+            "repeated_support": 960,
+            "repeated_hits": 626
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 3027,
+            "matched": 1642,
+            "absolute_latency_sum_frames": 14705,
+            "signed_latency_sum_frames": -1191,
+            "mean_absolute_latency_seconds": 0.3582216808769793
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2731,
+            "matched": 849,
+            "absolute_latency_sum_frames": 2633,
+            "signed_latency_sum_frames": 981,
+            "mean_absolute_latency_seconds": 0.12405182567726737
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.3729969933887166,
+        "macro_f1": 0.7463567046435083,
+        "alive_dead_f1": 0.8135603080358523,
+        "n_pred_spells": 269.65,
+        "fragmentation": 0.7149257217093579,
+        "false_d_runs_inside_true_possessions": 304.05,
+        "spell_f1_per_iou": {
+          "0.3": 0.5073828218644356,
+          "0.4": 0.44270062270573857,
+          "0.5": 0.37354053758929495,
+          "0.6": 0.3062602861800649,
+          "0.7": 0.23510069860404914
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.09166666666666666,
+            "repeated_support": 3000,
+            "repeated_hits": 275
+          },
+          "long": {
+            "recall": 0.6489583333333333,
+            "repeated_support": 960,
+            "repeated_hits": 623
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 2635,
+            "matched": 1306,
+            "absolute_latency_sum_frames": 10900,
+            "signed_latency_sum_frames": -1836,
+            "mean_absolute_latency_seconds": 0.333843797856049
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2724,
+            "matched": 827,
+            "absolute_latency_sum_frames": 2458,
+            "signed_latency_sum_frames": 946,
+            "mean_absolute_latency_seconds": 0.1188875453446191
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.3742036876085543,
+        "macro_f1": 0.7465601636356204,
+        "alive_dead_f1": 0.8135427866355123,
+        "n_pred_spells": 267.25,
+        "fragmentation": 0.7107623875323547,
+        "false_d_runs_inside_true_possessions": 304.1,
+        "spell_f1_per_iou": {
+          "0.3": 0.5089750307920542,
+          "0.4": 0.44418032085867754,
+          "0.5": 0.37384596527505304,
+          "0.6": 0.3075903552482131,
+          "0.7": 0.23642676586877434
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.09133333333333334,
+            "repeated_support": 3000,
+            "repeated_hits": 274
+          },
+          "long": {
+            "recall": 0.6489583333333333,
+            "repeated_support": 960,
+            "repeated_hits": 623
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 2586,
+            "matched": 1300,
+            "absolute_latency_sum_frames": 10744,
+            "signed_latency_sum_frames": -1778,
+            "mean_absolute_latency_seconds": 0.33058461538461537
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2725,
+            "matched": 828,
+            "absolute_latency_sum_frames": 2460,
+            "signed_latency_sum_frames": 944,
+            "mean_absolute_latency_seconds": 0.11884057971014492
+          }
+        }
+      }
+    },
+    "camera_independent": {
+      "v1": {
+        "spell_f1_mean": 0.37353214431648546,
+        "macro_f1": 0.7944831002524735,
+        "alive_dead_f1": 0.9021007422334,
+        "n_pred_spells": 424.9,
+        "fragmentation": 1.0294936146057097,
+        "false_d_runs_inside_true_possessions": 248.4,
+        "spell_f1_per_iou": {
+          "0.3": 0.5259631393299046,
+          "0.4": 0.45040022879747016,
+          "0.5": 0.3701600712701415,
+          "0.6": 0.2966958881362,
+          "0.7": 0.22444139404871116
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.11733333333333333,
+            "repeated_support": 3000,
+            "repeated_hits": 352
+          },
+          "long": {
+            "recall": 0.6010416666666667,
+            "repeated_support": 960,
+            "repeated_hits": 577
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5249,
+            "matched": 1924,
+            "absolute_latency_sum_frames": 16794,
+            "signed_latency_sum_frames": -1874,
+            "mean_absolute_latency_seconds": 0.3491476091476091
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 3215,
+            "matched": 1419,
+            "absolute_latency_sum_frames": 2701,
+            "signed_latency_sum_frames": 855,
+            "mean_absolute_latency_seconds": 0.07613812544045102
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.37959395870968266,
+        "macro_f1": 0.794231417354945,
+        "alive_dead_f1": 0.9006659807124031,
+        "n_pred_spells": 400.5,
+        "fragmentation": 0.985825076617664,
+        "false_d_runs_inside_true_possessions": 248.65,
+        "spell_f1_per_iou": {
+          "0.3": 0.5317578577958785,
+          "0.4": 0.45811630850759616,
+          "0.5": 0.3775982916297017,
+          "0.6": 0.30166276625557564,
+          "0.7": 0.22883456935966087
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.11266666666666666,
+            "repeated_support": 3000,
+            "repeated_hits": 338
+          },
+          "long": {
+            "recall": 0.6083333333333333,
+            "repeated_support": 960,
+            "repeated_hits": 584
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4765,
+            "matched": 1827,
+            "absolute_latency_sum_frames": 15989,
+            "signed_latency_sum_frames": -1375,
+            "mean_absolute_latency_seconds": 0.3500602079912425
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 3211,
+            "matched": 1423,
+            "absolute_latency_sum_frames": 2689,
+            "signed_latency_sum_frames": 831,
+            "mean_absolute_latency_seconds": 0.07558678847505271
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.37336523184366077,
+        "macro_f1": 0.7944094360180856,
+        "alive_dead_f1": 0.9020882603780169,
+        "n_pred_spells": 425.25,
+        "fragmentation": 1.0301282994393435,
+        "false_d_runs_inside_true_possessions": 248.75,
+        "spell_f1_per_iou": {
+          "0.3": 0.5257471458750909,
+          "0.4": 0.4503410179899431,
+          "0.5": 0.3699070854266727,
+          "0.6": 0.296581941968898,
+          "0.7": 0.22424896795769927
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.11733333333333333,
+            "repeated_support": 3000,
+            "repeated_hits": 352
+          },
+          "long": {
+            "recall": 0.6010416666666667,
+            "repeated_support": 960,
+            "repeated_hits": 577
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5256,
+            "matched": 1925,
+            "absolute_latency_sum_frames": 16796,
+            "signed_latency_sum_frames": -1876,
+            "mean_absolute_latency_seconds": 0.3490077922077922
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 3215,
+            "matched": 1414,
+            "absolute_latency_sum_frames": 2711,
+            "signed_latency_sum_frames": 903,
+            "mean_absolute_latency_seconds": 0.07669024045261669
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.37698458750685726,
+        "macro_f1": 0.7940602936569702,
+        "alive_dead_f1": 0.9009186313972245,
+        "n_pred_spells": 412.1,
+        "fragmentation": 1.0070697602970657,
+        "false_d_runs_inside_true_possessions": 249.8,
+        "spell_f1_per_iou": {
+          "0.3": 0.5290707283419934,
+          "0.4": 0.45406559659148016,
+          "0.5": 0.37458691257866317,
+          "0.6": 0.2998698774259633,
+          "0.7": 0.22732982259618623
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.11533333333333333,
+            "repeated_support": 3000,
+            "repeated_hits": 346
+          },
+          "long": {
+            "recall": 0.6,
+            "repeated_support": 960,
+            "repeated_hits": 576
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 4990,
+            "matched": 1869,
+            "absolute_latency_sum_frames": 16165,
+            "signed_latency_sum_frames": -1977,
+            "mean_absolute_latency_seconds": 0.3459604066345639
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 3218,
+            "matched": 1413,
+            "absolute_latency_sum_frames": 2738,
+            "signed_latency_sum_frames": 930,
+            "mean_absolute_latency_seconds": 0.07750884642604387
+          }
+        }
+      }
+    },
+    "camera_ball": {
+      "v1": {
+        "spell_f1_mean": 0.48432631888966143,
+        "macro_f1": 0.8779307247658844,
+        "alive_dead_f1": 0.9742618901630149,
+        "n_pred_spells": 398.7,
+        "fragmentation": 0.91934046495543,
+        "false_d_runs_inside_true_possessions": 140.45,
+        "spell_f1_per_iou": {
+          "0.3": 0.6312847495445562,
+          "0.4": 0.570437897106076,
+          "0.5": 0.4840330360960087,
+          "0.6": 0.4075114136111804,
+          "0.7": 0.32836449809048635
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.17133333333333334,
+            "repeated_support": 3000,
+            "repeated_hits": 514
+          },
+          "long": {
+            "recall": 0.8927083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 857
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5458,
+            "matched": 2491,
+            "absolute_latency_sum_frames": 21742,
+            "signed_latency_sum_frames": -1960,
+            "mean_absolute_latency_seconds": 0.34912886391007625
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2481,
+            "matched": 1745,
+            "absolute_latency_sum_frames": 2921,
+            "signed_latency_sum_frames": 475,
+            "mean_absolute_latency_seconds": 0.0669570200573066
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.4937839129761377,
+        "macro_f1": 0.8801222714303918,
+        "alive_dead_f1": 0.973697648404167,
+        "n_pred_spells": 382.65,
+        "fragmentation": 0.8903234992758934,
+        "false_d_runs_inside_true_possessions": 140.85,
+        "spell_f1_per_iou": {
+          "0.3": 0.6364378670652115,
+          "0.4": 0.5788758562196049,
+          "0.5": 0.4958048312983025,
+          "0.6": 0.4184833461056984,
+          "0.7": 0.33931766419187165
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.17,
+            "repeated_support": 3000,
+            "repeated_hits": 510
+          },
+          "long": {
+            "recall": 0.8916666666666667,
+            "repeated_support": 960,
+            "repeated_hits": 856
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5137,
+            "matched": 2451,
+            "absolute_latency_sum_frames": 21621,
+            "signed_latency_sum_frames": -2003,
+            "mean_absolute_latency_seconds": 0.3528518971848225
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2481,
+            "matched": 1755,
+            "absolute_latency_sum_frames": 3055,
+            "signed_latency_sum_frames": 615,
+            "mean_absolute_latency_seconds": 0.06962962962962962
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.48487287783632294,
+        "macro_f1": 0.8778327588827622,
+        "alive_dead_f1": 0.9742444774028106,
+        "n_pred_spells": 397.7,
+        "fragmentation": 0.9174687277430786,
+        "false_d_runs_inside_true_possessions": 141.2,
+        "spell_f1_per_iou": {
+          "0.3": 0.6306446702093644,
+          "0.4": 0.5709277409255045,
+          "0.5": 0.48508643734963186,
+          "0.6": 0.40847375500575483,
+          "0.7": 0.3292317856913588
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.17133333333333334,
+            "repeated_support": 3000,
+            "repeated_hits": 514
+          },
+          "long": {
+            "recall": 0.8927083333333333,
+            "repeated_support": 960,
+            "repeated_hits": 857
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5438,
+            "matched": 2485,
+            "absolute_latency_sum_frames": 21615,
+            "signed_latency_sum_frames": -1843,
+            "mean_absolute_latency_seconds": 0.34792756539235414
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2481,
+            "matched": 1735,
+            "absolute_latency_sum_frames": 2959,
+            "signed_latency_sum_frames": 585,
+            "mean_absolute_latency_seconds": 0.06821902017291066
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.48872552081012743,
+        "macro_f1": 0.8781791390458974,
+        "alive_dead_f1": 0.9739353480018375,
+        "n_pred_spells": 391.4,
+        "fragmentation": 0.9063770646852195,
+        "false_d_runs_inside_true_possessions": 141.6,
+        "spell_f1_per_iou": {
+          "0.3": 0.6327666187059557,
+          "0.4": 0.5738282251481231,
+          "0.5": 0.49030228409647625,
+          "0.6": 0.41290847290340055,
+          "0.7": 0.33382200319668176
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.17166666666666666,
+            "repeated_support": 3000,
+            "repeated_hits": 515
+          },
+          "long": {
+            "recall": 0.896875,
+            "repeated_support": 960,
+            "repeated_hits": 861
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 7235,
+            "predicted": 5309,
+            "matched": 2463,
+            "absolute_latency_sum_frames": 21164,
+            "signed_latency_sum_frames": -1952,
+            "mean_absolute_latency_seconds": 0.34371092164027606
+          },
+          "restart": {
+            "true": 2085,
+            "predicted": 2484,
+            "matched": 1739,
+            "absolute_latency_sum_frames": 3002,
+            "signed_latency_sum_frames": 628,
+            "mean_absolute_latency_seconds": 0.06905117883841289
+          }
+        }
+      }
+    }
+  },
+  "by_match": {
+    "J03WMX": {
+      "v1": {
+        "spell_f1_mean": 0.45946858421165065,
+        "macro_f1": 0.8692999489505603,
+        "alive_dead_f1": 0.948594962932126,
+        "n_pred_spells": 376.74,
+        "fragmentation": 0.8214332247557004,
+        "false_d_runs_inside_true_possessions": 171.6,
+        "spell_f1_per_iou": {
+          "0.3": 0.5941189987707606,
+          "0.4": 0.5398974848657098,
+          "0.5": 0.46086283793455557,
+          "0.6": 0.3911910366901302,
+          "0.7": 0.31127256279709736
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.15340314136125655,
+            "repeated_support": 9550,
+            "repeated_hits": 1465
+          },
+          "long": {
+            "recall": 0.7903703703703704,
+            "repeated_support": 2700,
+            "repeated_hits": 2134
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 20400,
+            "predicted": 12456,
+            "matched": 6301,
+            "absolute_latency_sum_frames": 51294,
+            "signed_latency_sum_frames": -4662,
+            "mean_absolute_latency_seconds": 0.3256245040469766
+          },
+          "restart": {
+            "true": 5050,
+            "predicted": 6284,
+            "matched": 3718,
+            "absolute_latency_sum_frames": 10583,
+            "signed_latency_sum_frames": 2395,
+            "mean_absolute_latency_seconds": 0.11385691231845078
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.46446933008007923,
+        "macro_f1": 0.8705738432375498,
+        "alive_dead_f1": 0.9484159114732642,
+        "n_pred_spells": 366.88,
+        "fragmentation": 0.8056026058631922,
+        "false_d_runs_inside_true_possessions": 171.92,
+        "spell_f1_per_iou": {
+          "0.3": 0.5986604822204616,
+          "0.4": 0.5458917222326342,
+          "0.5": 0.46797091884141034,
+          "0.6": 0.39550180666640833,
+          "0.7": 0.3143217204394816
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.1518324607329843,
+            "repeated_support": 9550,
+            "repeated_hits": 1450
+          },
+          "long": {
+            "recall": 0.7951851851851852,
+            "repeated_support": 2700,
+            "repeated_hits": 2147
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 20400,
+            "predicted": 11956,
+            "matched": 6287,
+            "absolute_latency_sum_frames": 51317,
+            "signed_latency_sum_frames": -4321,
+            "mean_absolute_latency_seconds": 0.3264959440114522
+          },
+          "restart": {
+            "true": 5050,
+            "predicted": 6291,
+            "matched": 3721,
+            "absolute_latency_sum_frames": 10588,
+            "signed_latency_sum_frames": 2398,
+            "mean_absolute_latency_seconds": 0.11381886589626446
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.44554335950984636,
+        "macro_f1": 0.8629281393287375,
+        "alive_dead_f1": 0.9473829826868152,
+        "n_pred_spells": 367.8,
+        "fragmentation": 0.8076872964169381,
+        "false_d_runs_inside_true_possessions": 173.56,
+        "spell_f1_per_iou": {
+          "0.3": 0.578781305894821,
+          "0.4": 0.5245542848573789,
+          "0.5": 0.44706997218690847,
+          "0.6": 0.3781538828910167,
+          "0.7": 0.29915735171910707
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.14858638743455496,
+            "repeated_support": 9550,
+            "repeated_hits": 1419
+          },
+          "long": {
+            "recall": 0.7844444444444445,
+            "repeated_support": 2700,
+            "repeated_hits": 2118
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 20400,
+            "predicted": 11985,
+            "matched": 5904,
+            "absolute_latency_sum_frames": 46654,
+            "signed_latency_sum_frames": -5548,
+            "mean_absolute_latency_seconds": 0.3160840108401084
+          },
+          "restart": {
+            "true": 5050,
+            "predicted": 6308,
+            "matched": 3673,
+            "absolute_latency_sum_frames": 10353,
+            "signed_latency_sum_frames": 2431,
+            "mean_absolute_latency_seconds": 0.11274707323713586
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.44701405901075913,
+        "macro_f1": 0.8630802633752773,
+        "alive_dead_f1": 0.9471355548483855,
+        "n_pred_spells": 362.6,
+        "fragmentation": 0.7995765472312704,
+        "false_d_runs_inside_true_possessions": 173.96,
+        "spell_f1_per_iou": {
+          "0.3": 0.5811350251113188,
+          "0.4": 0.5268446893464016,
+          "0.5": 0.447480916981284,
+          "0.6": 0.37895735319890933,
+          "0.7": 0.30065231041588186
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.14910994764397906,
+            "repeated_support": 9550,
+            "repeated_hits": 1424
+          },
+          "long": {
+            "recall": 0.7844444444444445,
+            "repeated_support": 2700,
+            "repeated_hits": 2118
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 20400,
+            "predicted": 11714,
+            "matched": 5852,
+            "absolute_latency_sum_frames": 45513,
+            "signed_latency_sum_frames": -5515,
+            "mean_absolute_latency_seconds": 0.31109364319890637
+          },
+          "restart": {
+            "true": 5050,
+            "predicted": 6319,
+            "matched": 3688,
+            "absolute_latency_sum_frames": 10386,
+            "signed_latency_sum_frames": 2402,
+            "mean_absolute_latency_seconds": 0.11264642082429502
+          }
+        }
+      }
+    },
+    "J03WN1": {
+      "v1": {
+        "spell_f1_mean": 0.4577891953296153,
+        "macro_f1": 0.8248316034029024,
+        "alive_dead_f1": 0.9217344906536082,
+        "n_pred_spells": 417.72,
+        "fragmentation": 0.9118616144975286,
+        "false_d_runs_inside_true_possessions": 181.5,
+        "spell_f1_per_iou": {
+          "0.3": 0.6014702745194016,
+          "0.4": 0.5350473645425756,
+          "0.5": 0.4637252842997709,
+          "0.6": 0.3856081030099774,
+          "0.7": 0.3030949502763511
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.17789473684210527,
+            "repeated_support": 8550,
+            "repeated_hits": 1521
+          },
+          "long": {
+            "recall": 0.6502857142857142,
+            "repeated_support": 1750,
+            "repeated_hits": 1138
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 19700,
+            "predicted": 14063,
+            "matched": 6995,
+            "absolute_latency_sum_frames": 61758,
+            "signed_latency_sum_frames": -9936,
+            "mean_absolute_latency_seconds": 0.3531551107934239
+          },
+          "restart": {
+            "true": 5250,
+            "predicted": 6724,
+            "matched": 3936,
+            "absolute_latency_sum_frames": 11323,
+            "signed_latency_sum_frames": 1109,
+            "mean_absolute_latency_seconds": 0.11507113821138212
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.45970060359040077,
+        "macro_f1": 0.8253224610182037,
+        "alive_dead_f1": 0.9213461056986795,
+        "n_pred_spells": 413.72,
+        "fragmentation": 0.9053377265238878,
+        "false_d_runs_inside_true_possessions": 181.78,
+        "spell_f1_per_iou": {
+          "0.3": 0.6029543559579704,
+          "0.4": 0.5379816352541448,
+          "0.5": 0.46468498553475457,
+          "0.6": 0.38809280931419643,
+          "0.7": 0.30478923189093804
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.17461988304093568,
+            "repeated_support": 8550,
+            "repeated_hits": 1493
+          },
+          "long": {
+            "recall": 0.6537142857142857,
+            "repeated_support": 1750,
+            "repeated_hits": 1144
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 19700,
+            "predicted": 13861,
+            "matched": 6973,
+            "absolute_latency_sum_frames": 61464,
+            "signed_latency_sum_frames": -10132,
+            "mean_absolute_latency_seconds": 0.35258281944643627
+          },
+          "restart": {
+            "true": 5250,
+            "predicted": 6726,
+            "matched": 3951,
+            "absolute_latency_sum_frames": 11420,
+            "signed_latency_sum_frames": 1204,
+            "mean_absolute_latency_seconds": 0.11561629967096937
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.43926932794533974,
+        "macro_f1": 0.8163300127267431,
+        "alive_dead_f1": 0.9209339972831149,
+        "n_pred_spells": 401.8,
+        "fragmentation": 0.8857660626029654,
+        "false_d_runs_inside_true_possessions": 183.22,
+        "spell_f1_per_iou": {
+          "0.3": 0.5821054987207394,
+          "0.4": 0.5155821047169641,
+          "0.5": 0.44402155096186413,
+          "0.6": 0.3670561198893909,
+          "0.7": 0.28758136543774027
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.16783625730994153,
+            "repeated_support": 8550,
+            "repeated_hits": 1435
+          },
+          "long": {
+            "recall": 0.6525714285714286,
+            "repeated_support": 1750,
+            "repeated_hits": 1142
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 19700,
+            "predicted": 13263,
+            "matched": 6402,
+            "absolute_latency_sum_frames": 55814,
+            "signed_latency_sum_frames": -10156,
+            "mean_absolute_latency_seconds": 0.3487285223367697
+          },
+          "restart": {
+            "true": 5250,
+            "predicted": 6728,
+            "matched": 3850,
+            "absolute_latency_sum_frames": 10867,
+            "signed_latency_sum_frames": 1083,
+            "mean_absolute_latency_seconds": 0.1129038961038961
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.43974947397589104,
+        "macro_f1": 0.8162225563103922,
+        "alive_dead_f1": 0.9206906482071697,
+        "n_pred_spells": 399.76,
+        "fragmentation": 0.8825370675453048,
+        "false_d_runs_inside_true_possessions": 183.44,
+        "spell_f1_per_iou": {
+          "0.3": 0.5826181736507015,
+          "0.4": 0.5160353864296193,
+          "0.5": 0.4439052408616328,
+          "0.6": 0.36785376413460374,
+          "0.7": 0.28833480480289786
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.16526315789473683,
+            "repeated_support": 8550,
+            "repeated_hits": 1413
+          },
+          "long": {
+            "recall": 0.6531428571428571,
+            "repeated_support": 1750,
+            "repeated_hits": 1143
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 19700,
+            "predicted": 13157,
+            "matched": 6384,
+            "absolute_latency_sum_frames": 55492,
+            "signed_latency_sum_frames": -10358,
+            "mean_absolute_latency_seconds": 0.34769423558897244
+          },
+          "restart": {
+            "true": 5250,
+            "predicted": 6732,
+            "matched": 3848,
+            "absolute_latency_sum_frames": 10847,
+            "signed_latency_sum_frames": 1063,
+            "mean_absolute_latency_seconds": 0.11275467775467776
+          }
+        }
+      }
+    },
+    "J03WOH": {
+      "v1": {
+        "spell_f1_mean": 0.5183963660000243,
+        "macro_f1": 0.8709922649454654,
+        "alive_dead_f1": 0.9483640902582944,
+        "n_pred_spells": 367.74,
+        "fragmentation": 0.9738492063492065,
+        "false_d_runs_inside_true_possessions": 135.38,
+        "spell_f1_per_iou": {
+          "0.3": 0.6507656810460558,
+          "0.4": 0.5942533497747919,
+          "0.5": 0.5262518110308992,
+          "0.6": 0.453202908875754,
+          "0.7": 0.36750807927262025
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.21763636363636363,
+            "repeated_support": 5500,
+            "repeated_hits": 1197
+          },
+          "long": {
+            "recall": 0.8838461538461538,
+            "repeated_support": 2600,
+            "repeated_hits": 2298
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 15050,
+            "predicted": 12283,
+            "matched": 5761,
+            "absolute_latency_sum_frames": 46915,
+            "signed_latency_sum_frames": -3497,
+            "mean_absolute_latency_seconds": 0.3257420586703697
+          },
+          "restart": {
+            "true": 5000,
+            "predicted": 6054,
+            "matched": 3728,
+            "absolute_latency_sum_frames": 11950,
+            "signed_latency_sum_frames": -864,
+            "mean_absolute_latency_seconds": 0.12821888412017166
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.5290281136724967,
+        "macro_f1": 0.8729258817204834,
+        "alive_dead_f1": 0.9480833381264407,
+        "n_pred_spells": 353.68,
+        "fragmentation": 0.9461111111111111,
+        "false_d_runs_inside_true_possessions": 135.56,
+        "spell_f1_per_iou": {
+          "0.3": 0.6575256567839112,
+          "0.4": 0.6063092041467495,
+          "0.5": 0.5359180252917463,
+          "0.6": 0.467396346383906,
+          "0.7": 0.3779913357561705
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.21563636363636363,
+            "repeated_support": 5500,
+            "repeated_hits": 1186
+          },
+          "long": {
+            "recall": 0.8880769230769231,
+            "repeated_support": 2600,
+            "repeated_hits": 2309
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 15050,
+            "predicted": 11576,
+            "matched": 5682,
+            "absolute_latency_sum_frames": 46542,
+            "signed_latency_sum_frames": -1050,
+            "mean_absolute_latency_seconds": 0.32764519535374864
+          },
+          "restart": {
+            "true": 5000,
+            "predicted": 6058,
+            "matched": 3725,
+            "absolute_latency_sum_frames": 12001,
+            "signed_latency_sum_frames": -807,
+            "mean_absolute_latency_seconds": 0.1288697986577181
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.5000115466266515,
+        "macro_f1": 0.8641621725330006,
+        "alive_dead_f1": 0.9473534617759978,
+        "n_pred_spells": 356.94,
+        "fragmentation": 0.9528174603174604,
+        "false_d_runs_inside_true_possessions": 136.86,
+        "spell_f1_per_iou": {
+          "0.3": 0.633431961992639,
+          "0.4": 0.5746830735747198,
+          "0.5": 0.507304694670883,
+          "0.6": 0.4332435247226214,
+          "0.7": 0.35139447817239394
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.20236363636363636,
+            "repeated_support": 5500,
+            "repeated_hits": 1113
+          },
+          "long": {
+            "recall": 0.8765384615384615,
+            "repeated_support": 2600,
+            "repeated_hits": 2279
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 15050,
+            "predicted": 11733,
+            "matched": 5253,
+            "absolute_latency_sum_frames": 41421,
+            "signed_latency_sum_frames": -5433,
+            "mean_absolute_latency_seconds": 0.31540833809251856
+          },
+          "restart": {
+            "true": 5000,
+            "predicted": 6064,
+            "matched": 3670,
+            "absolute_latency_sum_frames": 11627,
+            "signed_latency_sum_frames": -481,
+            "mean_absolute_latency_seconds": 0.12672479564032696
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.5029297585597351,
+        "macro_f1": 0.8643658863471779,
+        "alive_dead_f1": 0.9470514911192712,
+        "n_pred_spells": 351.6,
+        "fragmentation": 0.9425396825396826,
+        "false_d_runs_inside_true_possessions": 137.28,
+        "spell_f1_per_iou": {
+          "0.3": 0.6360708506272966,
+          "0.4": 0.5775544393366348,
+          "0.5": 0.5109312280844476,
+          "0.6": 0.43670210640204055,
+          "0.7": 0.3533901683482559
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.2018181818181818,
+            "repeated_support": 5500,
+            "repeated_hits": 1110
+          },
+          "long": {
+            "recall": 0.8773076923076923,
+            "repeated_support": 2600,
+            "repeated_hits": 2281
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 15050,
+            "predicted": 11458,
+            "matched": 5181,
+            "absolute_latency_sum_frames": 40667,
+            "signed_latency_sum_frames": -4625,
+            "mean_absolute_latency_seconds": 0.3139702760084926
+          },
+          "restart": {
+            "true": 5000,
+            "predicted": 6072,
+            "matched": 3670,
+            "absolute_latency_sum_frames": 11675,
+            "signed_latency_sum_frames": -421,
+            "mean_absolute_latency_seconds": 0.12724795640326975
+          }
+        }
+      }
+    },
+    "J03WOY": {
+      "v1": {
+        "spell_f1_mean": 0.49878253940199074,
+        "macro_f1": 0.8572385523698766,
+        "alive_dead_f1": 0.9466329409976324,
+        "n_pred_spells": 388.96,
+        "fragmentation": 0.9126537785588752,
+        "false_d_runs_inside_true_possessions": 140.9,
+        "spell_f1_per_iou": {
+          "0.3": 0.6431678070250095,
+          "0.4": 0.5858738308757222,
+          "0.5": 0.5040217381726932,
+          "0.6": 0.4215036180500259,
+          "0.7": 0.3393457028865026
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.14625,
+            "repeated_support": 6400,
+            "repeated_hits": 936
+          },
+          "long": {
+            "recall": 0.8615686274509804,
+            "repeated_support": 2550,
+            "repeated_hits": 2197
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 17200,
+            "predicted": 12931,
+            "matched": 6230,
+            "absolute_latency_sum_frames": 54225,
+            "signed_latency_sum_frames": -7489,
+            "mean_absolute_latency_seconds": 0.34815409309791334
+          },
+          "restart": {
+            "true": 5550,
+            "predicted": 6417,
+            "matched": 4084,
+            "absolute_latency_sum_frames": 11893,
+            "signed_latency_sum_frames": -1621,
+            "mean_absolute_latency_seconds": 0.11648383937316358
+          }
+        }
+      },
+      "challenger": {
+        "spell_f1_mean": 0.5063625819959516,
+        "macro_f1": 0.8589349606698852,
+        "alive_dead_f1": 0.9464513622729455,
+        "n_pred_spells": 375.84,
+        "fragmentation": 0.8895606326889278,
+        "false_d_runs_inside_true_possessions": 141.1,
+        "spell_f1_per_iou": {
+          "0.3": 0.6503612967022617,
+          "0.4": 0.5912721182344659,
+          "0.5": 0.5130955400879079,
+          "0.6": 0.429982050783688,
+          "0.7": 0.34710190417143394
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.1490625,
+            "repeated_support": 6400,
+            "repeated_hits": 954
+          },
+          "long": {
+            "recall": 0.8631372549019608,
+            "repeated_support": 2550,
+            "repeated_hits": 2201
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 17200,
+            "predicted": 12276,
+            "matched": 6152,
+            "absolute_latency_sum_frames": 53609,
+            "signed_latency_sum_frames": -5361,
+            "mean_absolute_latency_seconds": 0.34856306892067623
+          },
+          "restart": {
+            "true": 5550,
+            "predicted": 6416,
+            "matched": 4105,
+            "absolute_latency_sum_frames": 11919,
+            "signed_latency_sum_frames": -1685,
+            "mean_absolute_latency_seconds": 0.11614129110840439
+          }
+        }
+      },
+      "v1_no_motion": {
+        "spell_f1_mean": 0.47503564891019423,
+        "macro_f1": 0.8495731652951731,
+        "alive_dead_f1": 0.9456001069121116,
+        "n_pred_spells": 372.78,
+        "fragmentation": 0.8845694200351493,
+        "false_d_runs_inside_true_possessions": 142.6,
+        "spell_f1_per_iou": {
+          "0.3": 0.6225430931274605,
+          "0.4": 0.5617062524265723,
+          "0.5": 0.4779137408099561,
+          "0.6": 0.3967213411515804,
+          "0.7": 0.3162938170354014
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.13078125,
+            "repeated_support": 6400,
+            "repeated_hits": 837
+          },
+          "long": {
+            "recall": 0.8576470588235294,
+            "repeated_support": 2550,
+            "repeated_hits": 2187
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 17200,
+            "predicted": 12112,
+            "matched": 5511,
+            "absolute_latency_sum_frames": 47187,
+            "signed_latency_sum_frames": -9161,
+            "mean_absolute_latency_seconds": 0.34249319542732715
+          },
+          "restart": {
+            "true": 5550,
+            "predicted": 6427,
+            "matched": 4037,
+            "absolute_latency_sum_frames": 11689,
+            "signed_latency_sum_frames": -1091,
+            "mean_absolute_latency_seconds": 0.11581867723557097
+          }
+        }
+      },
+      "challenger_no_motion": {
+        "spell_f1_mean": 0.4781872379436754,
+        "macro_f1": 0.8498674897002797,
+        "alive_dead_f1": 0.9453041121504178,
+        "n_pred_spells": 366.36,
+        "fragmentation": 0.8733567662565904,
+        "false_d_runs_inside_true_possessions": 143.04,
+        "spell_f1_per_iou": {
+          "0.3": 0.6254026170477051,
+          "0.4": 0.5647779761980296,
+          "0.5": 0.48152041593262623,
+          "0.6": 0.39921047223112716,
+          "0.7": 0.3200247083088891
+        },
+        "duration_recall": {
+          "short": {
+            "recall": 0.13328125,
+            "repeated_support": 6400,
+            "repeated_hits": 853
+          },
+          "long": {
+            "recall": 0.8588235294117647,
+            "repeated_support": 2550,
+            "repeated_hits": 2190
+          }
+        },
+        "transition_timing": {
+          "turnover": {
+            "true": 17200,
+            "predicted": 11789,
+            "matched": 5485,
+            "absolute_latency_sum_frames": 46957,
+            "signed_latency_sum_frames": -8905,
+            "mean_absolute_latency_seconds": 0.3424393801276208
+          },
+          "restart": {
+            "true": 5550,
+            "predicted": 6429,
+            "matched": 4036,
+            "absolute_latency_sum_frames": 11673,
+            "signed_latency_sum_frames": -1073,
+            "mean_absolute_latency_seconds": 0.11568880079286423
+          }
+        }
+      }
+    }
+  },
+  "protocol_sha256": "5d36e3488505b6eea31ae1ff6bc37674cd94651ff9823b395db2b56a3d4c97f1",
+  "source_hashes": {
+    "configs/phase9.json": "6708d6f128a6745b888e145f3b66b6a3a0cbeb83aaea28cf39142f96acbbe3f1",
+    "src/mtah/reliability.py": "66e97c1d55cd6ff04eaa2c16b7b7d0ea2777907ab6cae5a3ad8e9c52af0708d1",
+    "scripts/run_phase9.py": "4408b1e69d92b1b7f6d7c355ffdaa5a6185adc614e3c7f172741457d944e6f85",
+    "docs/phase5_results.json": "7c301f55c790463bcbb924cb5b19c4cbe0276f77409478381cd7268d9f15f20d",
+    "configs/phase4.json": "a2b6173fc3f6f83fda35190cc93182ebd7de381030244617e6b26292169cb498",
+    "configs/phase5.json": "849f99d2bde9de5e5f96abc600092af1942c1218c2359ef5d8db31e1a22c5d90",
+    "uv.lock": "63da3097cf50a59e60d86904796656d395e0d43d047821e121f775da349e314e",
+    "outputs/phase5/oof/J03WMX/tree.pkl": "2d5a65ad9ae7826e6d2eae8626bea9c1051802d0974fa2ed153552b57c2f77b2",
+    "outputs/phase5/oof/J03WMX/motion.pt": "a91c1040f796249a163651180611982e1edeb6ecb842646440ba5d3404133c54",
+    "outputs/phase5/oof/J03WN1/tree.pkl": "bf790dce296a8dfe253f9ea45584c5ee61e7a3f527224305a5aaf8af00354b0d",
+    "outputs/phase5/oof/J03WN1/motion.pt": "48d67bd14101f686b85d8ef91bb69d6089a16364dc6481e335f0503d58436d1f",
+    "outputs/phase5/oof/J03WOH/tree.pkl": "5d60c8fff4513d6dc2c3e9a546e15830cdf1cda3bc69d2524f79ad0a81362a08",
+    "outputs/phase5/oof/J03WOH/motion.pt": "26ae2b9c3c89682755c2c613245ff7031873bcac0bed912778c84ec516d1260e",
+    "outputs/phase5/oof/J03WOY/tree.pkl": "d0d57e6665283c50c452985be0d7e68a96f44fd307af1d1fe70986a1a7159dd5",
+    "outputs/phase5/oof/J03WOY/motion.pt": "f045e536db9f557c6d6f44627a3db6bf679d8ed73ec4fdc47725558581791d3e"
+  },
+  "scheduler_repair": {
+    "previous_sha256": "bad464a000e034b3e137f552dbae9b3bf31771c0913690c023fdc8ec9c0ba8fd",
+    "repaired_sha256": "2f85a8fda92d5456b5e73ec0c0aee9a9cba7fadcdbcaf44719120cedfc9c9bba",
+    "model_or_selection_settings_changed": false
+  },
+  "validity_checkpoint_hashes": {
+    "J03WMX": "a48942a6cc0dc67931ce2a12c6473c7aab1633c83cff984de507d69262f28df6",
+    "J03WN1": "5ac35d9fa5bfa60ed34aeff8f6fc039364c31699f408ec014b248238bec8fb18",
+    "J03WOH": "a13f49b16f8357f82a528ffce70bc7bfd106eec27619cb8f5a2e3099117ceb53",
+    "J03WOY": "8235776a1d54b3744c19d30df51e1c0db92752d42e29c530e55f0bad726c8ca4"
+  },
+  "audit": {
+    "source_and_artifact_hashes": "PASS",
+    "official_spell_scores": "PASS",
+    "per_iou_scores": "PASS",
+    "original_clean_fold_replay": "PASS",
+    "aggregation": "PASS",
+    "target_read": false,
+    "final_holdouts_read": false
+  },
+  "development_skipped_reason": "CV adoption gates failed",
+  "development": null,
+  "independent_matches": 4,
+  "condition_seed_cells": 200,
+  "repeated_support_note": "Same reference spells recur across 10 conditions and 5 seeds; clean seeds are identical. Repeated counts are not independent sample sizes.",
+  "final_holdouts_read": false,
+  "target_read": false,
+  "v1_changed": false,
+  "data_credit": "DFL; Bassek et al. (2025), doi:10.1038/s41597-025-04505-y; CC BY 4.0"
+}

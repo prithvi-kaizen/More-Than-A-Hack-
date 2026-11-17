@@ -152,6 +152,15 @@ tracking to the competition feed. Real direction changes can also lower geometry
 reliability. Broader external control annotations and actual camera outages would
 be useful future tests; no such additions were introduced after freezing.
 
+A later external-only reliability prototype was excluded from the submission. Across
+four training-match folds, ten stress conditions and five seeds, it improved mean
+spellF1 from 0.4836 to 0.4899 but failed the predeclared 0.01 adoption-gain requirement.
+Its validity classifier fit two other training games and calibrated on the third;
+targets came automatically from corruptions of the same external coordinates. No new
+dataset, manual labels, final-test or competition data entered that experiment.
+These reused CV stress results are not comparable directly with the final-test table
+above. The submitted algorithm and checkpoints remain v1; see `docs/PHASE9_RELIABILITY.md`.
+
 ## Reproduction and artifacts
 
 The public repository is
